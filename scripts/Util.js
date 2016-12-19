@@ -4,14 +4,14 @@ function distance(x1,y1,x2,y2){
 }
 
 function directionToAngle(angle){
-  if(0<angle&&angle<90){
-
-  }else if(angle<180){
-
-  }else if(angle<270){
-
-  }else if(angle<180){
-
+  if(angle<45||315<angle){
+    return "right";
+  }else if(angle<135){
+    return "down";
+  }else if(angle<225){
+    return "left";
+  }else if(angle<315){
+    return "up";
   }
 }
 

@@ -137,7 +137,15 @@ var Mob=function(img){
       }
       if(i<self.path.length&&fieldMap!=null){
         var angle=Math.atan2(fieldMap.tiles[self.path[i].y][self.path[i].x].y-self.y,fieldMap.tiles[self.path[i].y][self.path[i].x].x-self.x);
-        angle*180/Math.PI;
+        if(directionToAngle(angle*180/Math.PI)=="left"){
+          ani.changeDirection("left");
+        }else if(directionToAngle(angle*180/Math.PI)=="up"){
+          ani.changeDirection("up");
+        }else if(directionToAngle(angle*180/Math.PI)=="right"){
+          ani.changeDirection("right");
+        }else if(directionToAngle(angle*180/Math.PI)=="down"){
+          ani.changeDirection("down");
+        }
         self.speedX+=Math.cos(angle)*self.accel;
         self.speedY+=Math.sin(angle)*self.accel;
         if(fieldMap.tiles[self.path[i].y][self.path[i].x].x-searchRange<self.x&&self.x<fieldMap.tiles[self.path[i].y][self.path[i].x].x+searchRange&&fieldMap.tiles[self.path[i].y][self.path[i].x].y-searchRange<self.y&&self.y<fieldMap.tiles[self.path[i].y][self.path[i].x].y+searchRange){
