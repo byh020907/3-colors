@@ -48,13 +48,16 @@ var Player=function(img){
   self.maxHealth=100;
   self.currentHealth=100;
 
+  var ani=new animation(self.image,self.width,self.height,4,4);
+
   self.draw=function(context){
     if(pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       context.fillStyle="rgba(255,0,0,1)";
       context.fillRect(-self.width/2,-self.height/1.5,(self.currentHealth/self.maxHealth)*self.width,10);
-      context.drawImage(self.image,-self.width/2,-self.height/2,self.width,self.height);
+      ani.draw(context);
+      ani.nextFrame();
       context.restore();
     }
   }
@@ -68,6 +71,7 @@ var Player=function(img){
     if(Math.abs(self.speedY)<self.maxSpeed){
       self.speedY+=Math.sin(angle*Math.PI/180)*self.accel;
     }
+    ani.changeDirection(directionToAngle(angle*180/Math.PI));
   }
 
   self.attacked=function(damage){
