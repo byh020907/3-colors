@@ -43,19 +43,19 @@ charImage5.src="images/player5.png";
 var obstacleImage0=new Image();
 
 var obstacleImage1=new Image();
-obstacleImage1.src="images/장애물1.jpg";
+obstacleImage1.src="images/장애물1.png";
 
 var obstacleImage2=new Image();
-obstacleImage2.src="images/장애물2.jpg";
+obstacleImage2.src="images/장애물2.png";
 
 var obstacleImage3=new Image();
-obstacleImage3.src="images/장애물3.jpg";
+obstacleImage3.src="images/장애물3.png";
 
 var obstacleImage4=new Image();
-obstacleImage4.src="images/장애물4.jpg";
+obstacleImage4.src="images/장애물4.png";
 
 var obstacleImage5=new Image();
-obstacleImage5.src="images/장애물5.jpg";
+obstacleImage5.src="images/장애물5.png";
 
 
 
