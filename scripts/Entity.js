@@ -71,7 +71,7 @@ var Player=function(img){
     if(Math.abs(self.speedY)<self.maxSpeed){
       self.speedY+=Math.sin(angle*Math.PI/180)*self.accel;
     }
-    ani.changeDirection(directionToAngle(angle*180/Math.PI));
+    ani.changeDirection(directionToAngle(angle));
   }
 
   self.attacked=function(damage){
