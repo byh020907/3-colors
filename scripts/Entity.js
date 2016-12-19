@@ -71,7 +71,7 @@ var Player=function(img){
     if(Math.abs(self.speedY)<self.maxSpeed){
       self.speedY+=Math.sin(angle*Math.PI/180)*self.accel;
     }
-    ani.changeDirection(directionToAngle(angle));
+    ani.changeDirection(directionToAngle("degree",angle));
   }
 
   self.attacked=function(damage){
@@ -132,7 +132,7 @@ var Mob=function(img){
       var angle=Math.atan2(y-self.y,x-self.x);
       self.speedX+=Math.cos(angle)*self.accel;
       self.speedY+=Math.sin(angle)*self.accel;
-      ani.changeDirection(directionToAngle(angle*180/Math.PI));
+      ani.changeDirection(directionToAngle("radian",angle));
     }else{
       if(self.find){
         self.path=[];
@@ -142,7 +142,7 @@ var Mob=function(img){
       }
       if(i<self.path.length&&fieldMap!=null){
         var angle=Math.atan2(fieldMap.tiles[self.path[i].y][self.path[i].x].y-self.y,fieldMap.tiles[self.path[i].y][self.path[i].x].x-self.x);
-        ani.changeDirection(directionToAngle(angle*180/Math.PI));
+        ani.changeDirection(directionToAngle("radian",angle));
         self.speedX+=Math.cos(angle)*self.accel;
         self.speedY+=Math.sin(angle)*self.accel;
         if(fieldMap.tiles[self.path[i].y][self.path[i].x].x-searchRange<self.x&&self.x<fieldMap.tiles[self.path[i].y][self.path[i].x].x+searchRange&&fieldMap.tiles[self.path[i].y][self.path[i].x].y-searchRange<self.y&&self.y<fieldMap.tiles[self.path[i].y][self.path[i].x].y+searchRange){

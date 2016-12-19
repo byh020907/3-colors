@@ -3,16 +3,37 @@ function distance(x1,y1,x2,y2){
   return Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
 }
 
-function directionToAngle(angle){
-  if(-45<angle&&angle<45){
-    return "right";
-  }else if(45<angle&&angle<135){
-    return "down";
-  }else if(-135<angle&&angle<-45){
-    return "up";
-  }else if(-135<angle&&angle<135){
-    return "left";
+function directionToAngle(type,angle){
+  switch (type) {
+    case "degree":{
+      if(315<angle&&angle<45){
+        return "right";
+      }else if(45<angle&&angle<135){
+        return "down";
+      }else if(225<angle&&angle<315){
+        return "up";
+      }else if(135<angle&&angle<225){
+        return "left";
+      }
+      break;
+    }
+
+    case "radian":{
+      if(-Math.PI/4<angle&&angle<Math.PI/4){
+        return "right";
+      }else if(Math.PI/4<angle&&angle<3*Math.PI/4){
+        return "down";
+      }else if(-3*Math.PI/4<angle&&angle<-Math.PI/4){
+        return "up";
+      }else if(-3*Math.PI/4<angle&&angle<3*Math.PI/4){
+        return "left";
+      }
+      break;
+    }
+    default:break;
+
   }
+
 }
 
 function directionToRect(entity,rect){
