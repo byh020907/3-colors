@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>타일맵 생성기</title>
+  </head>
+  <style media="screen">
+    canvas{
+      border: 3px solid red;
+    }
+    #outputButton{
+      width:100px;
+      height:100px;
+      position: absolute;
+      top:10px;
+      left:2020px;
+    }
+    #outputMapData{
+      position: absolute;
+      top:110px;
+      left:2020px;
+    }
+  </style>
+  <body>
+    <script type="text/javascript">
+      var canvas;
+      var context;
+      var button;
+      var outputBox;
+
+      var keyInput=[];
+      var clicked=false;
+      var selectedTilePosition={x:10,y:10};
+
+      var map=[];
+      var tileSize=25;
+
+      var inputSize={width:10,height:10};
+      inputSize.width=prompt("행 입력",0);
+      inputSize.height=prompt("열 입력",0);
+      for(var y=0;y<inputSize.height;y++){
+        var arr=[];
+        for(var x=0;x<inputSize.width;x++){
+          arr[x]=0;
+        }
+        map[y]=arr;
+      }
+
+      window.addEventListener("load",init,false);
+      window.addEventListener("keydown",keyDown,false);
+      window.addEventListener("keyup",keyUp,false);
+      window.addEventListener("mousedown",mouseDown,false);
+      window.addEventListener("mouseup",mouseUp,false);
+      window.addEventListener("mousemove",mouseMove,false);
+
+
+      function keyDown(e){
+        keyInput[e.keyCode]=true;
+      }
+
+      function keyUp(e){
+        keyInput[e.keyCode]=false;
+      }
+
+      function mouseDown(e){
+        clicked=true;
+      }
+
+      function mouseUp(e){
+        clicked=false;
+      }
+
+      function mouseMove(e){
+        selectedTilePosition={x:Math.floor(e.pageX/tileSize),y:Math.floor(e.pageY/tileSize)};
+      }
+
+      function init(){
+        canvas=document.getElementById("canvas");
+        context=canvas.getContext("2d");
+        button=document.getElementById("outputButton");
+        outputBox=document.getElementById("outputMapData");
+
+        button.onclick=function(){
+          var string="[\n";
+          for(var y=0;y<map.length;y++){
+            for(var x=0;x<map[0].length;x++){
+              if(x==0){
+                if(y==0){
+                  string+="\t[";
+                }else{
+                  string+="\t,[";
+                }
+                string=string+map[y][x]+",";
+              }else if(x==map[0].length-1){
+                string=string+map[y][x];
+                string+="]";
+              }else{
+                string=string+map[y][x]+",";
+              }
+            }
+            string=string+"\n";
+          }
+          string+="];";
+          outputBox.value=string;
+        }
+
+
+        setInterval(function(){
+          if(clicked){
+            for(var i=0;i<=9;i++){
+              if(keyInput[i+48]){
+                map[selectedTilePosition.y][selectedTilePosition.x]=i;
+              }
+            }
+            for(var i=0;i<=9;i++){
+              if(keyInput[i+48]&&keyInput[83]){
+                for(var y=selectedTilePosition.y-1;y<=selectedTilePosition.y+1;y++){
+                  for(var x=selectedTilePosition.x-1;x<=selectedTilePosition.x+1;x++){
+                    if(map[y][x]!=undefined){
+                      map[y][x]=i;
+                    }
+                  }
+                }
+              }
+            }
+            if(keyInput[68]){
+              for(var y=selectedTilePosition.y-1;y<=selectedTilePosition.y+1;y++){
+                for(var x=selectedTilePosition.x-1;x<=selectedTilePosition.x+1;x++){
+                  if(map[y][x]!=undefined){
+                    map[y][x]=0;
+                  }
+                }
+              }
+            }
+
+            if(keyInput[66]){
+              map[selectedTilePosition.y][selectedTilePosition.x]=999;
+            }
+          }
+          context.save();
+          context.clearRect(0,0,canvas.width,canvas.height);
+          context.fillStyle="rgba(0,0,0,1)";
+          context.fillRect(0,0,map[0].length*tileSize,map.length*tileSize);
+          for(var y=0;y<map.length;y++){
+            for(var x=0;x<map[0].length;x++){
+              if(map[y][x]==1){
+                context.fillStyle="rgba(0,0,0,1)";
+                context.fillRect(x*tileSize+1,y*tileSize+1,tileSize-2,tileSize-2);
+              }else if(map[y][x]==2){
+                context.fillStyle="rgba(255,0,0,1)";
+                context.fillRect(x*tileSize+1,y*tileSize+1,tileSize-2,tileSize-2);
+              }else if(map[y][x]==3){
+                context.fillStyle="rgba(255,255,0,1)";
+                context.fillRect(x*tileSize+1,y*tileSize+1,tileSize-2,tileSize-2);
+              }else if(map[y][x]==4){
+                context.fillStyle="rgba(255,0,255,1)";
+                context.fillRect(x*tileSize+1,y*tileSize+1,tileSize-2,tileSize-2);
+              }else if(map[y][x]==999){
+                context.fillStyle="rgba(255,55,255,1)";
+                context.fillRect(x*tileSize+1,y*tileSize+1,tileSize-2,tileSize-2);
+              }else{
+                context.fillStyle="rgba(255,255,255,1)";
+                context.fillRect(x*tileSize+1,y*tileSize+1,tileSize-2,tileSize-2);
+              }
+            }
+          }
+          context.fillStyle="rgba(0,0,0,1)";
+          context.restore();
+        },100);
+      }
+
+    </script>
+
+    <canvas id="canvas" width="2000" height="2000"></canvas>
+    <button id="outputButton" type="button" name="button">출력</button>
+    <textarea id="outputMapData" name="outputMapData" rows="500" cols="500"></textarea>
+  </body>
+</html>
