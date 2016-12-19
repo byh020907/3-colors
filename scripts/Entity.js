@@ -102,6 +102,9 @@ var Mob=function(img){
   self.attackSpeed=1000;
   self.path=[];
   self.find=true;
+
+  self.color=0;//Color.RED:1,Color.GREEN:2,Color.BLUE:3
+
   var i=1;
   var searchRange=10;
   var attackEnable=true;
