@@ -132,6 +132,7 @@ var Mob=function(img){
       var angle=Math.atan2(y-self.y,x-self.x);
       self.speedX+=Math.cos(angle)*self.accel;
       self.speedY+=Math.sin(angle)*self.accel;
+      ani.changeDirection(directionToAngle(angle*180/Math.PI));
     }else{
       if(self.find){
         self.path=[];
