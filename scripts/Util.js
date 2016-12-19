@@ -6,14 +6,14 @@ function distance(x1,y1,x2,y2){
 function directionToAngle(type,angle){
   switch (type) {
     case "degree":{
-      if(315<angle&&angle<45){
+      if(315<=angle||angle<=45){
         return "right";
-      }else if(45<angle&&angle<135){
+      }else if(45<=angle&&angle<=135){
         return "down";
-      }else if(225<angle&&angle<315){
-        return "up";
-      }else if(135<angle&&angle<225){
+      }else if(135<=angle&&angle<=225){
         return "left";
+      }else if(225<=angle&&angle<=315){
+        return "up";
       }
       break;
     }
@@ -25,7 +25,7 @@ function directionToAngle(type,angle){
         return "down";
       }else if(-3*Math.PI/4<angle&&angle<-Math.PI/4){
         return "up";
-      }else if(-3*Math.PI/4<angle&&angle<3*Math.PI/4){
+      }else if(3*Math.PI/4<angle||angle<-3*Math.PI/4){
         return "left";
       }
       break;
@@ -96,11 +96,21 @@ function animation(image,width,height,segmentX,segmentY){
   var dy=0;
   var segmentWidth=image.width/segmentX;
   var segmentHeight=image.height/segmentY;
-  this.nextFrame=function(){
-    if(dx<segmentX){
+
+  var drawNext;
+  this.nextFrame=function(fps){
+    if(dx<segmentX&&drawNext){
       dx++;
-    }else{
+      drawNext=false;
+      setTimeout(function(){
+        drawNext=true;
+      },fps);
+    }else if(drawNext){
       dx=0;
+      drawNext=false;
+      setTimeout(function(){
+        drawNext=true;
+      },fps);
     }
   }
 

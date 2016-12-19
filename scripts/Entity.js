@@ -57,7 +57,7 @@ var Player=function(img){
       context.fillStyle="rgba(255,0,0,1)";
       context.fillRect(-self.width/2,-self.height/1.5,(self.currentHealth/self.maxHealth)*self.width,10);
       ani.draw(context);
-      ani.nextFrame();
+      ani.nextFrame(1000/30);
       context.restore();
     }
   }
@@ -111,7 +111,7 @@ var Mob=function(img){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       ani.draw(context);
-      ani.nextFrame();
+      ani.nextFrame(1000/30);
       context.restore();
     }
   }
