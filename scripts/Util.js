@@ -97,9 +97,9 @@ function animation(image,width,height,segmentX,segmentY){
   var segmentWidth=image.width/segmentX;
   var segmentHeight=image.height/segmentY;
 
-  var drawNext;
+  var drawNext=true;
   this.nextFrame=function(fps){
-    if(dx<segmentX&&drawNext){
+    if(dx<segmentX-1&&drawNext){
       dx++;
       drawNext=false;
       setTimeout(function(){
