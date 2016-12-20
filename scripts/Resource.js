@@ -98,6 +98,21 @@ logoImg.src = "images/logo.png";
 var gameOverImg = new Image();
 gameOverImg.src = "images/gameOver.png";
 
+var audio = function(src, startTime) {
+  var a = new Audio();
+  a.src = src;
+  a.currentTime = startTime;
+
+  var self={
+    audio:a,
+    onOff:true
+  }
+  sounds.push(self);
+  return self;
+}
+var sounds=[];
+
+
 var stageScreen = function() {
   console.log("Game Start Button Clicked");
   fadeOut();
