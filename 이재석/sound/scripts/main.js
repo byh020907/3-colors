@@ -11,11 +11,14 @@ function UI(x, y, width, height) {
 function init() {
     var canvas = document.getElementById("screen");
     var canvasCtx = canvas.getContext("2d");
-    gameStartAudio.play();
+    audio("audio/startAudio.mp3", 30, 1, true);
+    audio("audio/crashAudio.mp3", 0, 1, false);
+    audio("audio/gameOverAudio.mp3", 0, 1, false);
+
     fadeIn();
     var background = Background(bgImg, canvas, function() {
         console.log("Background Clicked");
-        gameStartAudio.pause();
+        sounds[0][0] = false;
         fadeOut();
         setTimeout(function() {
             fadeIn();
@@ -36,6 +39,14 @@ function init() {
         }
         for (var i = 0; i < Button.list.length; i++) {
             Button.list[i].draw(canvasCtx);
+        }
+
+        for (var i = 0; i < sounds.length; i++) {
+            if (sounds[i][0]) {
+                sounds[i][1].play();
+            } else {
+                sounds[i][1].pause();
+            }
         }
 
         requestAnimationFrame(loop);

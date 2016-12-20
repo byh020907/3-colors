@@ -24,6 +24,7 @@ var stage = [
 var stageScreen = function() {
     console.log("Game Start Button Clicked");
     fadeOut();
+    sounds[0][0] = true;
     setTimeout(function() {
         fadeIn();
         buttonClicked = false;
