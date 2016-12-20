@@ -11,19 +11,15 @@ function UI(x, y, width, height) {
 function init() {
     var canvas = document.getElementById("screen");
     var canvasCtx = canvas.getContext("2d");
+    fadeIn();
     var background = Background(bgImg, canvas, function() {
         console.log("Background Clicked");
-        var b = Background(bgImgBW, canvas, function() {});
-        var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200, function() {
-            console.log("Game Start Button Clicked");
-            buttonClicked = true;
-            Button.list = [];
-            Background.list = [];
-            var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
-            for (var i = 0; i < 3; i++) {
-                var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 400, 450, 200, 200, stage[i]);
-            }
-        });
+        fadeOut();
+        setTimeout(function() {
+            fadeIn();
+            var b = Background(bgImgBW, canvas, function() {});
+            var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200, stageScreen);
+        }, 500);
     });
     var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
 

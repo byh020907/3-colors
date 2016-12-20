@@ -17,7 +17,6 @@ function Background(image, canvas, func) {
         gameCounter = 1;
     }
 
-    fadeIn();
     Background.list.push(self);
     return self;
 }

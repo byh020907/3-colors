@@ -20,7 +20,6 @@ function Button(image, imgX, imgY, imgWidth, imgHeight, x, y, width, height, fun
         }
     }
 
-    fadeIn();
     Button.list.push(self);
     return self;
 }
