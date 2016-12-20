@@ -34,8 +34,8 @@ var fadeCount = 0;
 
 var fadeColor="rgba(255,255,255,0)";
 
-var charImage1=new Image();
-charImage1.src="images/플레이어.png";
+var charImage0=new Image();
+charImage0.src="images/플레이어.png";
 
 var mobImage0=new Image();
 mobImage0.src="images/일반몹.png";
@@ -65,6 +65,9 @@ obstacleImage4.src="images/파란블럭.png";
 
 var obstacleImage5=new Image();
 obstacleImage5.src="images/회색블럭.png";
+
+var finishImage=new Image();
+finishImage.src="images/끝.jpg";
 
 var itemImage0=new Image();
 itemImage0.src="images/체력회복아이템.png";

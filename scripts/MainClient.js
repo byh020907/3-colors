@@ -116,11 +116,12 @@ function selectState(currentState){
 			Button.list = [];
 			Background.list = [];
 
-			Entity.list=[];
+			Entity.list={};
 			user=null;
-			Mob.list=[];
-			Tile.list=[];
-			FieldMap.list=[];
+			Mob.list={};
+			Tile.list={};
+			Item.list={};
+			FieldMap.list={};
 			var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
 			for (var i = 0; i < 3; i++) {
 					var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 400, 450, 200, 200, (function(a){
@@ -136,10 +137,6 @@ function selectState(currentState){
 			fadeIn();
       Button.list = [];
       Background.list = [];
-      user=Player(charImage1);
-      user.x=1000+50;
-      user.y=1100+50;
-			user.accel=0.4;
       fieldMap=FieldMap(1,[
 	[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]
 	,[5,0,2,2,2,0,2,0,0,2,2,2,0,0,0,2,2,2,0,4,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,5,0,0,2,2,2,2,2,2,0,0,0,0,5]
@@ -240,7 +237,7 @@ function drawLoop(){
 		}
   }
 
-	for(var i=0;i<Entity.list.length;i++){
+	for(var i in Entity.list){
 		var e=Entity.list[i];
 		e.draw(bufferCtx);
 	}
@@ -326,9 +323,13 @@ function mainLoop(){
 	if(user!=null){
 		for(var i in Tile.list){
 			var t=Tile.list[i];
-			if(hitTestBox(user,t)&&t.tileId!=0){
-				user.speedX=-Math.cos(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);
-				user.speedY=-Math.sin(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);
+			if(hitTestBox(user,t)){
+				if(t.tileId==11){
+					console.log("GAMECLEAR");
+				}else if(t.tileId!=0){
+					user.speedX=-Math.cos(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);
+					user.speedY=-Math.sin(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);
+				}
 			}
 		}
 	}
@@ -344,6 +345,16 @@ function mainLoop(){
 			}
 		}
   }
+
+	//아이템 대 유저
+	if(user!=null){
+		for(var i in Item.list){
+			var item=Item.list[i];
+			if(hitTestBox(user,item)){
+				item.get();
+			}
+		}
+	}
 
   if(mainLoopEnable){
     requestAnimationFrame(mainLoop);

@@ -34,11 +34,11 @@ var Entity=function(img){
     self.speedX*=0.95;
     self.speedY*=0.95;
   }
-  Entity.list.push(self);
+  Entity.list[self.id]=self;
   return self;
 }
 
-Entity.list=[];
+Entity.list={};
 
 var Player=function(img){
   var self=Entity(img);
@@ -172,6 +172,30 @@ var Mob=function(img){
 }
 Mob.list={};
 
+var Item=function(img,func){
+  var self=Entity(img);
+
+  self.draw=function(context){
+    if(pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
+      context.save();
+      context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
+      context.drawImage(self.image,-self.width/2,-self.height/2,self.width,self.height);
+      context.restore();
+    }
+  }
+
+  self.get=function(){
+    func();
+    delete Item.list[self.id];
+    delete Entity.list[self.id];
+  }
+
+  Item.list[self.id]=self;
+  return self;
+}
+
+Item.list={};
+
 
 var Tile=function(img,id,x,y,size){
   var self=Entity(img);
@@ -215,7 +239,7 @@ var FieldMap=function(id,map){
       var num=self.map[y][x];
       if(num<=5){
         self.tiles[y][x]=Tile(window["obstacleImage"+num],num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
-      }else if(num>=6){
+      }else if(6<=num&&num<=9){
         var m=Mob(window["mobImage"+(num-6)]);
         m.color=num-6;
         m.x=x*self.tileSize+self.tileSize/2;
@@ -225,6 +249,32 @@ var FieldMap=function(id,map){
         }else{
           m.accel=0.8;
         }
+        self.tiles[y][x]=Tile(window["obstacleImage"+0],0,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
+      }else if(10<=num&&num<=11){
+        if(num==10){
+          user=Player(charImage0);
+          user.x=x*self.tileSize+self.tileSize/2;
+          user.y=y*self.tileSize+self.tileSize/2;
+          user.accel=0.4;
+          self.tiles[y][x]=Tile(window["obstacleImage"+0],0,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
+        }else if(num==11){
+          self.tiles[y][x]=Tile(finishImage,num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
+        }
+      }else if(12<=num&&num<=13){
+        if(num==12){
+          var i=Item(window["itemImage"+(num-12)],function(){
+            user.currentHealth=user.maxHealth;
+          });
+        }else if(num==13){
+          var i=Item(window["itemImage"+(num-12)],function(){
+            console.log("ss");
+          });
+        }
+
+        i.x=x*self.tileSize+self.tileSize/2;
+        i.y=y*self.tileSize+self.tileSize/2;
+        i.width=50;
+        i.width=50;
         self.tiles[y][x]=Tile(window["obstacleImage"+0],0,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
       }
     }
