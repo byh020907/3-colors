@@ -16,10 +16,13 @@ function init() {
     audio("audio/crashAudio.mp3", 0);
     audio("audio/gameOverAudio.mp3", 0);
 
+    sounds[1].onOff = false;
+    sounds[2].onOff = false;
     fadeIn();
     var background = Background(bgImg, canvas, function() {
         console.log("Background Clicked");
         sounds[0].onOff = false;
+        sounds[1].onOff = true;
         fadeOut();
         setTimeout(function() {
             fadeIn();
