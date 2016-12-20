@@ -220,7 +220,11 @@ var FieldMap=function(id,map){
         m.color=num-6;
         m.x=x*self.tileSize+self.tileSize/2;
         m.y=y*self.tileSize+self.tileSize/2;
-        m.accel=0.6;
+        if(m.color==0){
+          m.accel=0.2;
+        }else{
+          m.accel=0.8;
+        }
         self.tiles[y][x]=Tile(window["obstacleImage"+0],0,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
       }
     }
