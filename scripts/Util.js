@@ -208,23 +208,40 @@ function findPath(map,startPoint,finalPoint){
   return path;
 }
 
+var fadeOut = function() {
+    console.log("페이드 아웃 시작");
+    fading = true;
+    bgFadeAlpha = 1;
+    var fadeO = setInterval(
+        function() {
+            bgFadeAlpha *= 0.9;
+            if (bgFadeAlpha <= 0.001) {
+                clearInterval(fadeO);
+                console.log("페이드 아웃 끝");
+                fading = false;
+            }
+        }, 10
+    );
+};
+
 var fadeIn = function(fadeColor) {
-    if (fading) {
-        fading = false;
-    } else {
-        console.log("페이드 시작");
-        bgFadeAlpha = 0;
-        if(fadeColor!=null){
-          window.fadeColor=fadeColor;
-        }
-        var fade = setInterval(
-            function() {
-                bgFadeAlpha += 0.01;
-                if (bgFadeAlpha >= 1) {
-                    clearInterval(fade);
-                    console.log("페이드 끝");
-                }
-            }, 10
-        );
+    console.log("페이드 인 시작");
+    fadeCount++;
+    fading = true;
+
+    bgFadeAlpha = 0.001;
+    if(fadeColor!=null){
+      window.fadeColor=fadeColor;
     }
+    var fadeI = setInterval(
+        function() {
+            bgFadeAlpha *= 1.1;
+            if (bgFadeAlpha >= 1) {
+                clearInterval(fadeI);
+                console.log("페이드 인 끝");
+                fading = false;
+                bgFadeAlpha=1;
+            }
+        }, 10
+    );
 };

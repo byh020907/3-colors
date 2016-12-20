@@ -30,6 +30,8 @@ var gameCounter = 0;
 var buttonClicked = false;
 var bgFadeAlpha = 0;
 var fading = false;
+var fadeCount = 0;
+
 var fadeColor="rgba(255,255,255,0)";
 
 var charImage1=new Image();
@@ -87,3 +89,5 @@ var stagesImg = new Image();
 stagesImg.src = "images/stagesImage.png";
 var logoImg = new Image();
 logoImg.src = "images/logo.png";
+var gameOverImg = new Image();
+gameOverImg.src = "images/gameOver.png";

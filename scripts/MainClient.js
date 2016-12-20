@@ -84,26 +84,35 @@ function init(){
   canvasBuffer.height=canvas.height;
   bufferCtx=canvasBuffer.getContext("2d");
 
+	fadeIn();
   var background = Background(bgImg, canvas, function() {
-    console.log("Background Clicked");
-    var b = Background(bgImgBW, canvas, function() {});
-    var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200, function() {
-        console.log("Game Start Button Clicked");
-        buttonClicked = true;
-        Button.list = [];
-        Background.list = [];
-        var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
-        for (var i = 0; i < 3; i++) {
-            var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 400, 450, 200, 200, (function(a){
-              return function(){
-                currentState=State["STAGE"+(1+a)];
-                selectState(currentState);
-              }
-            }(i)));
-        }
-    });
-});
-var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
+      console.log("Background Clicked");
+      fadeOut();
+      setTimeout(function() {
+          fadeIn();
+          var b = Background(bgImgBW, canvas, function() {});
+          var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200, function(){
+						console.log("Game Start Button Clicked");
+						fadeOut();
+						setTimeout(function() {
+							fadeIn();
+							buttonClicked = false;
+							Button.list = [];
+							Background.list = [];
+							var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
+							for (var i = 0; i < 3; i++) {
+								var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 400, 450, 200, 200, (function(a){
+									return function(){
+										currentState=State["STAGE"+(1+a)];
+										selectState(currentState);
+									}
+								}(i)));
+							}
+						}, 500);
+					});
+      }, 500);
+  });
+  var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
 
   gameLoop();
   drawLoop();
@@ -148,11 +157,11 @@ function selectState(currentState){
       user.x=1000+50;
       user.y=1100+50;
 			user.accel=0.4;
-			for(var i=0;i<10;i++){
-				var m=Mob(charImage5);
-				m.x=100*i;
-				m.y=100*i;
-			}
+			// for(var i=0;i<10;i++){
+			// 	var m=Mob(charImage5);
+			// 	m.x=100*i;
+			// 	m.y=100*i;
+			// }
       fieldMap=FieldMap(1,[
 	[0,0,2,2,2,0,0,0,2,2,0,0,0,0,0,2,2,2,0,4,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0]
 	,[0,0,2,2,2,0,2,0,0,2,2,2,0,0,0,2,2,2,0,4,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0]
