@@ -1,11 +1,14 @@
-var audio = function(src, startTime, volume, onOff) {
-    var a = new Audio();
-    a.src = src;
-    a.currentTime = startTime;
-    a.volume = volume;
+"use strict"
+var audio = function(src, startTime) {
+  var a = new Audio();
+  a.src = src;
+  a.currentTime = startTime;
 
-    sounds.push([onOff, a]);
-    return [onOff, a];
+  var self={
+    audio:a,
+    onOff:true
+  }
+  sounds.push(self);
+  return self;
 }
-
-var sounds = [];
+var sounds=[];

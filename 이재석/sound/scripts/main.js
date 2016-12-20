@@ -11,6 +11,7 @@ function UI(x, y, width, height) {
 function init() {
     var canvas = document.getElementById("screen");
     var canvasCtx = canvas.getContext("2d");
+    //�ҽ�����, ���۽ð�(��), ����(0~1), �Ҹ�����
     audio("audio/startAudio.mp3", 30, 1, true);
     audio("audio/crashAudio.mp3", 0, 1, false);
     audio("audio/gameOverAudio.mp3", 0, 1, false);
@@ -18,7 +19,7 @@ function init() {
     fadeIn();
     var background = Background(bgImg, canvas, function() {
         console.log("Background Clicked");
-        sounds[0][0] = false;
+        sounds[0].onOff = false;
         fadeOut();
         setTimeout(function() {
             fadeIn();
@@ -42,10 +43,10 @@ function init() {
         }
 
         for (var i = 0; i < sounds.length; i++) {
-            if (sounds[i][0]) {
-                sounds[i][1].play();
+            if (sounds[i].onOff) {
+                sounds[i].audio.play();
             } else {
-                sounds[i][1].pause();
+                sounds[i].audio.pause();
             }
         }
 
