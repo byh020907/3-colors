@@ -44,7 +44,7 @@ var mobImage0=new Image();
 mobImage0.src="images/일반몹.png";
 
 var mobImage1=new Image();
-mobImage1.src="images/일반몹.png";
+mobImage1.src="images/빨간몹.png";
 
 var mobImage2=new Image();
 mobImage2.src="images/일반몹.png";
