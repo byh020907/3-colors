@@ -40,6 +40,9 @@ charImage1.src="images/player1.png";
 var charImage5=new Image();
 charImage5.src="images/player5.png";
 
+var mobImage0=new Image();
+mobImage0.src="images/일반몹.png";
+
 var mobImage1=new Image();
 mobImage1.src="images/일반몹.png";
 
@@ -47,10 +50,7 @@ var mobImage2=new Image();
 mobImage2.src="images/일반몹.png";
 
 var mobImage3=new Image();
-mobImage3.src="images/일반몹.png";
-
-var mobImage4=new Image();
-mobImage4.src="images/파란몹.png";
+mobImage3.src="images/파란몹.png";
 
 var obstacleImage0=new Image();
 
@@ -76,9 +76,6 @@ mapImage1.src="images/map7.jpg";
 
 var mapImage1_1=new Image();
 mapImage1_1.src="images/map7_1.png";
-
-var foodImage=new Image();
-foodImage.src="images/foods.png";
 
 
 //재석이 이미지

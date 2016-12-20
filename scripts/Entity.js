@@ -206,12 +206,10 @@ var FieldMap=function(id,map){
       if(num<=5){
         self.tiles[y][x]=Tile(window["obstacleImage"+num],num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
       }else(num>=6){
-        if(num==6){
-          var m=Mob();
-        }
-
+        var m=Mob(window["mobImage"+num-6]);
         m.x=x*self.tileSize+self.tileSize/2;
         m.y=y*self.tileSize+self.tileSize/2;
+        m.accel=0.6;
         self.tiles[y][x]=Tile(window["obstacleImage"+0],num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
       }
     }

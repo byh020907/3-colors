@@ -128,7 +128,7 @@ function selectState(currentState){
     case State.LOBBY:{
 			Button.list = [];
 			Background.list = [];
-			
+
 			Entity.list=[];
 			user=null;
 			Mob.list=[];
@@ -152,12 +152,6 @@ function selectState(currentState){
       user.x=1000+50;
       user.y=1100+50;
 			user.accel=0.4;
-      for(var i=0;i<10;i++){
-        var m=Mob(charImage5);
-        m.x=200*i;
-        m.y=500*i;
-        m.accel=0.6;
-      }
       fieldMap=FieldMap(1,[
         [0,0,2,2,2,0,0,0,2,2,0,0,0,0,0,2,2,2,0,4,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0]
         ,[0,0,2,2,2,0,2,0,0,2,2,2,0,0,0,2,2,2,0,4,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0]
