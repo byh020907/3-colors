@@ -302,7 +302,7 @@ function mainLoop(){
   for(var i in Mob.list){
     var m=Mob.list[i];
     var hitArea={x:m.x+m.width/2,y:m.y+m.height/2,width:m.width,height:m.height};
-    if(user!=null&&hitTestBox(user,hitArea)){
+    if(m.interaction&&user!=null&&hitTestBox(user,hitArea)){
       user.speedX+=-Math.cos(Math.atan2(m.y-user.y,m.x-user.x));
       user.speedY+=-Math.sin(Math.atan2(m.y-user.y,m.x-user.x));
       m.speedX+=Math.cos(Math.atan2(m.y-user.y,m.x-user.x));

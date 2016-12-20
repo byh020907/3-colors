@@ -103,6 +103,8 @@ var Mob=function(img){
   self.path=[];
   self.find=true;
 
+  self.interaction=true;
+
   self.color=0;//Color.RED:1,Color.GREEN:2,Color.BLUE:3
 
   var i=1;
@@ -110,7 +112,7 @@ var Mob=function(img){
   var attackEnable=true;
   var ani=new animation(self.image,self.width,self.height,4,4);
   self.draw=function(context){
-    if((self.color==0||self.color==currentColor)&&pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
+    if(self.interaction&&pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       ani.draw(context);
@@ -130,33 +132,39 @@ var Mob=function(img){
   }
 
   self.move=function(map,x,y){
-
-    if(distance(self.x,self.y,x,y)<200){
-      var angle=Math.atan2(y-self.y,x-self.x);
-      self.speedX+=Math.cos(angle)*self.accel;
-      self.speedY+=Math.sin(angle)*self.accel;
-      ani.changeDirection(directionToAngle("radian",angle));
-    }else{
-      if(self.find){
-        self.path=[];
-        self.path=findPath(deepCopy(map),{x:Math.floor(self.x/100),y:Math.floor(self.y/100)},{x:Math.floor(x/100),y:Math.floor(y/100)});
-        self.find=false;
-        i=1;
-      }
-      if(i<self.path.length&&fieldMap!=null){
-        var angle=Math.atan2(fieldMap.tiles[self.path[i].y][self.path[i].x].y-self.y,fieldMap.tiles[self.path[i].y][self.path[i].x].x-self.x);
-        ani.changeDirection(directionToAngle("radian",angle));
+    if(self.interaction){
+      if(distance(self.x,self.y,x,y)<200){
+        var angle=Math.atan2(y-self.y,x-self.x);
         self.speedX+=Math.cos(angle)*self.accel;
         self.speedY+=Math.sin(angle)*self.accel;
-        if(fieldMap.tiles[self.path[i].y][self.path[i].x].x-searchRange<self.x&&self.x<fieldMap.tiles[self.path[i].y][self.path[i].x].x+searchRange&&fieldMap.tiles[self.path[i].y][self.path[i].x].y-searchRange<self.y&&self.y<fieldMap.tiles[self.path[i].y][self.path[i].x].y+searchRange){
-          self.speedX=self.speedY=0;
-          i++;
+        ani.changeDirection(directionToAngle("radian",angle));
+      }else{
+        if(self.find){
+          self.path=[];
+          self.path=findPath(deepCopy(map),{x:Math.floor(self.x/100),y:Math.floor(self.y/100)},{x:Math.floor(x/100),y:Math.floor(y/100)});
+          self.find=false;
+          i=1;
+        }
+        if(i<self.path.length&&fieldMap!=null){
+          var angle=Math.atan2(fieldMap.tiles[self.path[i].y][self.path[i].x].y-self.y,fieldMap.tiles[self.path[i].y][self.path[i].x].x-self.x);
+          ani.changeDirection(directionToAngle("radian",angle));
+          self.speedX+=Math.cos(angle)*self.accel;
+          self.speedY+=Math.sin(angle)*self.accel;
+          if(fieldMap.tiles[self.path[i].y][self.path[i].x].x-searchRange<self.x&&self.x<fieldMap.tiles[self.path[i].y][self.path[i].x].x+searchRange&&fieldMap.tiles[self.path[i].y][self.path[i].x].y-searchRange<self.y&&self.y<fieldMap.tiles[self.path[i].y][self.path[i].x].y+searchRange){
+            self.speedX=self.speedY=0;
+            i++;
+          }
         }
       }
     }
 
   }
   self.update=function(){
+    if(self.color==0||self.color==currentColor){
+      self.interaction=true;
+    }else{
+      self.interaction=false;
+    }
     self.updateSpeed();
   }
   Mob.list[self.id]=self;
