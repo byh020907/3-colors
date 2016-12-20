@@ -116,11 +116,7 @@ var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
 }
 
 function colorChange(color){
-	switch(color){
-		case Color.RED:RED=true;GREEN=false;BLUE=false;break;
-		case Color.GREEN:GREEN=true;RED=false;BLUE=false;break;
-		case Color.BLUE:BLUE=true;RED=false;GREEN=false;break;
-	}
+	currentColor=color;
 }
 
 function selectState(currentState){

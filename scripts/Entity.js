@@ -110,7 +110,7 @@ var Mob=function(img){
   var attackEnable=true;
   var ani=new animation(self.image,self.width,self.height,4,4);
   self.draw=function(context){
-    if(pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
+    if((self.color==0||self.color==currentColor)&&pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       ani.draw(context);
@@ -171,9 +171,11 @@ var Tile=function(img,id,x,y,size){
   self.y=y;
   self.tileId=id;
   self.width=self.height=size;
-
+  if(2<=self.tileId&&self.tileId<=4){
+    self.color=self.tileId-1;
+  }
   self.draw=function(context){
-    if(self.tileId!=0&&self.tileId!=1&&pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
+    if((self.color==null||self.color==currentColor)&&self.tileId!=0&&self.tileId!=1&&pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       context.drawImage(self.image,-self.width/2,-self.height/2,self.width,self.height);

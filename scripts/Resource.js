@@ -5,9 +5,7 @@ var Color={
   GREEN:2,
   BLUE:3,
 }
-var RED=false;
-var GREEN=false;
-var BLUE=false;
+var currentColor=Color.RED;
 
 var drawArea=100;
 
