@@ -221,7 +221,7 @@ var FieldMap=function(id,map){
         m.x=x*self.tileSize+self.tileSize/2;
         m.y=y*self.tileSize+self.tileSize/2;
         m.accel=0.6;
-        self.tiles[y][x]=Tile(window["obstacleImage"+0],num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
+        self.tiles[y][x]=Tile(window["obstacleImage"+0],0,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
       }
     }
   }

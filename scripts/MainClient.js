@@ -89,27 +89,9 @@ function init(){
       console.log("Background Clicked");
       fadeOut();
       setTimeout(function() {
-          fadeIn();
-          var b = Background(bgImgBW, canvas, function() {});
-          var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200, function(){
-						console.log("Game Start Button Clicked");
-						fadeOut();
-						setTimeout(function() {
-							fadeIn();
-							buttonClicked = false;
-							Button.list = [];
-							Background.list = [];
-							var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
-							for (var i = 0; i < 3; i++) {
-								var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 400, 450, 200, 200, (function(a){
-									return function(){
-										currentState=State["STAGE"+(1+a)];
-										selectState(currentState);
-									}
-								}(i)));
-							}
-						}, 500);
-					});
+        fadeIn();
+        var b = Background(bgImgBW, canvas, function() {});
+        var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200,stageScreen);
       }, 500);
   });
   var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
@@ -151,17 +133,13 @@ function selectState(currentState){
       break;
     }
     case State.STAGE1:{
+			fadeIn();
       Button.list = [];
       Background.list = [];
       user=Player(charImage1);
       user.x=1000+50;
       user.y=1100+50;
 			user.accel=0.4;
-			// for(var i=0;i<10;i++){
-			// 	var m=Mob(charImage5);
-			// 	m.x=100*i;
-			// 	m.y=100*i;
-			// }
       fieldMap=FieldMap(1,[
 	[0,0,2,2,2,0,0,0,2,2,0,0,0,0,0,2,2,2,0,4,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0]
 	,[0,0,2,2,2,0,2,0,0,2,2,2,0,0,0,2,2,2,0,4,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0]
@@ -214,6 +192,12 @@ function selectState(currentState){
 	,[0,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0]
 	,[0,0,0,0,0,0,0,2,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0]
 ]);
+Mob.list=[];
+for(var i=0;i<10;i++){
+	var m=Mob(charImage5);
+	m.x=100*i;
+	m.y=100*i;
+}
       break;
     }
     case State.STAGE2:{
@@ -306,6 +290,16 @@ function mainLoop(){
 
 	if(user!=null&&user.toRemove){
 		user=null;
+		fadeOut();
+    setTimeout(function() {
+        fadeIn();
+				currentState=State.LOBBY;
+				selectState(currentState);
+        Button.list = [];
+        Background.list = [];
+				fieldMap=null;
+        var gameOverBtn = Button(gameOverImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
+    }, 500);
 	}
 
   for(var i in Mob.list){
