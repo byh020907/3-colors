@@ -216,15 +216,11 @@ var FieldMap=function(id,map){
   }
 
   self.draw=function(context){
-    context.drawImage(mapImage1,pivot.x-canvas.width/2,pivot.y-canvas.height/2,canvas.width,canvas.height,0,0,canvas.width,canvas.height);
-    // for(var y=0;y<self.height;y++){
-    //   for(var x=0;x<self.width;x++){
-    //     if(pivot.x-drawArea-canvas.width/2<(x*self.tileSize+self.tileSize/2)&&(x*self.tileSize+self.tileSize/2)<pivot.x+drawArea+canvas.width/2&&
-    //       pivot.y-drawArea-canvas.height/2<(y*self.tileSize+self.tileSize/2)&&(y*self.tileSize+self.tileSize/2)<pivot.y+drawArea+canvas.height/2){
-    //         self.tiles[y][x].draw(context);
-    //     }
-    //   }
-    // }
+    context.save();
+    context.fillStyle="rgba(0,0,0,1)";
+    context.fillRect(0,0,context.width,context.height);
+    context.restore();
+    //context.drawImage(mapImage1,pivot.x-canvas.width/2,pivot.y-canvas.height/2,canvas.width,canvas.height,0,0,canvas.width,canvas.height);
   }
   FieldMap.list[self.id]=self;
   return self;
