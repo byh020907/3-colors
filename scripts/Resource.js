@@ -105,7 +105,7 @@ var audio = function(src, startTime) {
 
   var self={
     audio:a,
-    onOff:true
+    onOff:true,
   }
   sounds.push(self);
   return self;
