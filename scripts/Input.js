@@ -6,20 +6,31 @@ window.addEventListener("mouseup",mouseUp,false);
 window.addEventListener("mousemove",mouseMove,false);
 
 var keyInput=[];
+
+var lastColor=Color.RED;
 function keyDown(e){
   keyInput[e.keyCode]=true;
 
   if(keyInput[49]){
-    colorChange(Color.RED);
-    fadeIn("rgba(255,0,0,0.2)");
+    if(lastColor!=Color.RED){
+      colorChange(Color.RED);
+      fadeIn("rgba(255,0,0,0.2)");
+      lastColor=Color.RED;
+    }
   }
   if(keyInput[50]){
-    colorChange(Color.GREEN);
-    fadeIn("rgba(0,255,0,0.2)");
+    if(lastColor!=Color.GREEN){
+      colorChange(Color.GREEN);
+      fadeIn("rgba(0,255,0,0.2)");
+      lastColor=Color.GREEN;
+    }
   }
   if(keyInput[51]){
-    colorChange(Color.BLUE);
-    fadeIn("rgba(0,0,255,0.2)");
+    if(lastColor!=Color.BLUE){
+      colorChange(Color.BLUE);
+      fadeIn("rgba(0,0,255,0.2)");
+      lastColor=Color.BLUE;
+    }
   }
 }
 
