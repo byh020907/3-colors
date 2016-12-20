@@ -218,7 +218,7 @@ var FieldMap=function(id,map){
   self.draw=function(context){
     context.save();
     context.fillStyle="rgba(0,0,0,1)";
-    context.fillRect(0,0,context.width,context.height);
+    context.fillRect(0,0,canvas.width,canvas.height);
     context.restore();
     //context.drawImage(mapImage1,pivot.x-canvas.width/2,pivot.y-canvas.height/2,canvas.width,canvas.height,0,0,canvas.width,canvas.height);
   }
