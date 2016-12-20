@@ -207,6 +207,7 @@ var FieldMap=function(id,map){
         self.tiles[y][x]=Tile(window["obstacleImage"+num],num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
       }else if(num>=6){
         var m=Mob(window["mobImage"+num-6]);
+        m.color=num-6;
         m.x=x*self.tileSize+self.tileSize/2;
         m.y=y*self.tileSize+self.tileSize/2;
         m.accel=0.6;
