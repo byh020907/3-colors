@@ -12,9 +12,9 @@ function init() {
     var canvas = document.getElementById("screen");
     var canvasCtx = canvas.getContext("2d");
     //�ҽ�����, ���۽ð�(��), ����(0~1), �Ҹ�����
-    audio("audio/startAudio.mp3", 30, 1, true);
-    audio("audio/crashAudio.mp3", 0, 1, false);
-    audio("audio/gameOverAudio.mp3", 0, 1, false);
+    audio("audio/startAudio.mp3", 30);
+    audio("audio/crashAudio.mp3", 0);
+    audio("audio/gameOverAudio.mp3", 0);
 
     fadeIn();
     var background = Background(bgImg, canvas, function() {
