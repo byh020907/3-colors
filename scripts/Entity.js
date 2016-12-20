@@ -203,7 +203,17 @@ var FieldMap=function(id,map){
   for(var y=0;y<self.height;y++){
     for(var x=0;x<self.width;x++){
       var num=self.map[y][x];
-      self.tiles[y][x]=Tile(window["obstacleImage"+num],num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
+      if(num<=5){
+        self.tiles[y][x]=Tile(window["obstacleImage"+num],num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
+      }else(num>=6){
+        if(num==6){
+          var m=Mob();
+        }
+
+        m.x=x*self.tileSize+self.tileSize/2;
+        m.y=y*self.tileSize+self.tileSize/2;
+        self.tiles[y][x]=Tile(window["obstacleImage"+0],num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
+      }
     }
   }
 

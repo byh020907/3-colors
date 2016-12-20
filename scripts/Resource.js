@@ -40,6 +40,18 @@ charImage1.src="images/player1.png";
 var charImage5=new Image();
 charImage5.src="images/player5.png";
 
+var mobImage1=new Image();
+mobImage1.src="images/일반몹.png";
+
+var mobImage2=new Image();
+mobImage2.src="images/일반몹.png";
+
+var mobImage3=new Image();
+mobImage3.src="images/일반몹.png";
+
+var mobImage4=new Image();
+mobImage4.src="images/파란몹.png";
+
 var obstacleImage0=new Image();
 
 var obstacleImage1=new Image();
