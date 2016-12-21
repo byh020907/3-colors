@@ -87,6 +87,10 @@ stunEffectImage.src="images/스턴이미지.png";
 
 
 //tutorialImage
+
+var howtoImage=new Image();
+howtoImage.src="images/howto.png";
+
 var tutorialImage0=new Image();
 tutorialImage0.src="images/방향키.jpg";
 

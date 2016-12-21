@@ -49,7 +49,7 @@ function init(){
       fadeIn();
       var b = Background(bgImgBW, canvas, function() {});
       var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200,stageScreen);
-      var tutorialBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 300, 200, 200,function(){
+      var tutorialBtn = Button(howtoImage, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 250, 200, 200,function(){
         Button.list = [];
         Background.list = [];
         var tutorialBtn0 = Button(tutorialImage0, 0, 0, tutorialImage0.width, tutorialImage0.height, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200,function(){
@@ -76,6 +76,7 @@ function init(){
       sounds[1].onOff = false;
     }, 4000);
   }
+  
   var background = Background(bgImg, canvas, start);
   var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
 
