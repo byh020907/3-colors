@@ -94,7 +94,7 @@ var MiniMap=function(x,y,width,height){
     context.save();
     context.translate(self.x + self.width / 2, self.y + self.height / 2);
     context.rotate(self.rotate * Math.PI / 180);
-    context.fillStyle="blue";
+    context.fillStyle="rgba(20,20,20,1)";
     context.fillRect(-self.width / 2, -self.height / 2, self.width, self.height);
     self.setLocation(context);
     context.restore();

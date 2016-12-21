@@ -99,12 +99,12 @@ function selectState(currentState){
       break;
     }
     case State.STAGE1:{
-			currentRemainTime=20;
-			miniMap=MiniMap(550,550,100,100);
+			currentRemainTime=30;
+			miniMap=MiniMap(1600-150,0,150,150);
 			fadeIn();
       Button.list = [];
       Background.list = [];
-			timeTextField=TextField(currentRemainTime,"30px Verdana","rgba(255,255,255,1)",1500,100,100);
+			timeTextField=TextField(currentRemainTime,"30px Verdana","rgba(255,255,255,1)",1475,200,100);
 			timeCounter=timer(10,currentRemainTime,function(){
 				fadeColor="rgba(255,255,255,0)";
 				fadeIn();
