@@ -124,24 +124,57 @@ var gameClearImg = new Image();
 gameClearImg.src = "images/gameClear.png";
 
 
-var audio = function(src, startTime) {
-  var a = new Audio();
-  a.src = src;
-  a.currentTime = startTime;
+var audio = function(src, startTime, endTime) {
+    var a = new Audio();
+    a.src = src;
+    a.currentTime = startTime;
+    a.autoplay = false;
 
-  var self={
-    audio:a,
-    onOff:true,
-  }
-  sounds.push(self);
-  return self;
+    var self = {
+        audio: a,
+        onOff: false, // true -> false
+        endTime: endTime
+    }
+
+    self.timePlay = function() {
+        self.audio.play();
+
+        var playAudio = setInterval(function() {
+            if (self.audio.currentTime >= self.endTime) {
+                self.audio.pause();
+                self.onOff = false;
+                clearInterval(playAudio);
+                console.log("Audio Stopped");
+            }
+        }, 1000);
+    };
+
+    sounds.push(self);
+    return self;
 }
-var sounds=[];
+var sounds = [];
+
+//add
+    audio("audio/coinGetAudio.wav", 0, 0.3); //0
+    audio("audio/crashAudio.mp3", 0, 5); //1
+    audio("audio/dumAudio.wav", 0, 3); //2
+    audio("audio/endingAudio.wav", 0, 45); //3
+    audio("audio/gameOverAudio.mp3", 0, 11); //4
+    audio("audio/gameWinAudio.mp3", 0, 4); //5
+    audio("audio/healAudio.wav", 0, 0.3); //6
+    audio("audio/inGameAudio.wav", 0, 120); //7
+    audio("audio/inGameAudio2.mp3", 0, 180); //8
+    audio("audio/startAudio.mp3", 0, 180); //9
+    audio("audio/timeUpAudio.wav", 0, 0.9); //10
 
 
 var stageScreen = function() {
   console.log("Game Start Button Clicked");
   fadeOut();
+
+  soundsClear();
+  sounds[8].onOff = true;
+
   setTimeout(function() {
     fadeIn();
     buttonClicked = false;

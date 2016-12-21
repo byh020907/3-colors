@@ -275,13 +275,16 @@ var FieldMap=function(id,map){
         if(num==12){
           var i=Item(window["itemImage"+(num-12)],function(){
             user.currentHealth=user.maxHealth;
+            sounds[6].onOff = true;
           });
         }else if(num==13){
           var i=Item(window["itemImage"+(num-12)],function(){
             currentRemainTime+=20;
+            sounds[10].onOff = true;
           });
         }else if(num==14){
           var i=Item(window["itemImage"+(num-12)],function(){
+            sounds[1].onOff = true;
             for(var i in Mob.list){
               var m=Mob.list[i];
               m.stun=true;

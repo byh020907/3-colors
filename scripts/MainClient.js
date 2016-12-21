@@ -33,17 +33,11 @@ function init(){
   canvasBuffer.height=canvas.height;
   bufferCtx=canvasBuffer.getContext("2d");
 
-	audio("audio/startAudio.mp3", 30);
-  audio("audio/crashAudio.mp3", 0);
-  audio("audio/gameOverAudio.mp3", 0);
-
-  sounds[1].onOff = false;
-  sounds[2].onOff = false;
+  sounds[9].onOff = true;
 	fadeIn();
   function start() {
     console.log("Background Clicked");
-  	sounds[0].onOff = false;
-    sounds[1].onOff = true;
+    soundsClear();
     fadeOut();
     setTimeout(function() {
       fadeIn();
@@ -92,6 +86,9 @@ function init(){
 function selectState(currentState){
   switch (currentState) {
     case State.LOBBY:{
+      soundsClear();
+      sounds[8].onOff = true;
+
 			if(timeCounter!=null){
 				clearInterval(timeCounter.loop);
 			}
@@ -118,6 +115,9 @@ function selectState(currentState){
       break;
     }
     case State.STAGE1:{
+      soundsClear();
+      sounds[7].onOff = true;
+
 			currentRemainTime=40;
 			miniMap=MiniMap(1600-160,10,150,150);
 			fadeIn();
@@ -139,6 +139,9 @@ function selectState(currentState){
       break;
     }
     case State.STAGE2:{
+      soundsClear();
+      sounds[8].onOff = true;
+
       currentRemainTime=40;
 			miniMap=MiniMap(1600-160,10,150,150);
 			fadeIn();
@@ -160,6 +163,9 @@ function selectState(currentState){
       break;
     }
     case State.STAGE3:{
+      soundsClear();
+      sounds[7].onOff = true;
+
       currentRemainTime=40;
 			miniMap=MiniMap(1600-160,10,150,150);
 			fadeIn();
@@ -211,13 +217,13 @@ function selectState(currentState){
 
 function gameLoop(){
 
-	for (var i = 0; i < sounds.length; i++) {
-    if (sounds[i].onOff) {
-        sounds[i].audio.play();
-    } else {
-        sounds[i].audio.pause();
-    }
-	}
+  for (var i = 0; i < sounds.length; i++) {
+      if (sounds[i].onOff) {
+          sounds[i].timePlay();
+      } else {
+          sounds[i].audio.pause();
+      }
+  }
 
 	if(timeTextField!=null){
 		timeTextField.text=(currentRemainTime).toFixed(2);

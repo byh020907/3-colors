@@ -279,3 +279,9 @@ var fadeIn = function() {
         }, 10
     );
 };
+
+var soundsClear = function() {
+    for (var i = 0; i < sounds.length; i++) {
+        sounds[i].onOff = false;
+    }
+}
