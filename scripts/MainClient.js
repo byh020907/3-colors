@@ -267,7 +267,18 @@ function mainLoop(){
 			var t=Tile.list[i];
 			if(hitTestBox(user,t)){
 				if(t.tileId==11){
-					console.log("GAMECLEAR");
+					user=null;
+					fadeColor="rgba(255,255,255,0)";
+					fadeOut();
+			    setTimeout(function() {
+			        fadeIn();
+							currentState=State.LOBBY;
+							selectState(currentState);
+			        Button.list = [];
+			        Background.list = [];
+							fieldMap=null;
+			        var gameClearBtn = Button(gameClearImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
+			    }, 500);
 				}else if(t.tileId!=0){
 					user.speedX=-Math.cos(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);
 					user.speedY=-Math.sin(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);

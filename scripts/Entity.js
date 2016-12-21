@@ -16,7 +16,8 @@ var Entity=function(img){
     speedX:0,
     speedY:0,
     accel:0.5,
-    maxSpeed:10
+    maxSpeed:10,
+    friction:0.95
   };
 
   self.draw=function(context){
@@ -31,8 +32,8 @@ var Entity=function(img){
   self.updateSpeed=function(){
     self.x+=self.speedX;
     self.y+=self.speedY;
-    self.speedX*=0.95;
-    self.speedY*=0.95;
+    self.speedX*=self.friction;
+    self.speedY*=self.friction;
   }
   Entity.list[self.id]=self;
   return self;
@@ -255,7 +256,8 @@ var FieldMap=function(id,map){
           user=Player(charImage0);
           user.x=x*self.tileSize+self.tileSize/2;
           user.y=y*self.tileSize+self.tileSize/2;
-          user.accel=0.4;
+          user.accel=1;
+          user.friction=0.8;
           self.tiles[y][x]=Tile(window["obstacleImage"+0],0,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
         }else if(num==11){
           self.tiles[y][x]=Tile(finishImage,num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);

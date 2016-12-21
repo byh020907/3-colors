@@ -101,6 +101,9 @@ var logoImg = new Image();
 logoImg.src = "images/logo.png";
 var gameOverImg = new Image();
 gameOverImg.src = "images/gameOver.png";
+var gameClearImg = new Image();
+gameClearImg.src = "images/gameClear.png";
+
 
 var audio = function(src, startTime) {
   var a = new Audio();
