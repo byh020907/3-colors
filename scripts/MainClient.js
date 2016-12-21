@@ -49,19 +49,19 @@ function init(){
       fadeIn();
       var b = Background(bgImgBW, canvas, function() {});
       var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200,stageScreen);
-      var tutorialBtn = Button(howtoImage, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 250, 200, 200,function(){
+      var tutorialBtn = Button(howtoImage, 0, 0, howtoImage.width, howtoImage.height, canvas.width - 200,0, 200, 200,function(){
         Button.list = [];
         Background.list = [];
-        var tutorialBtn0 = Button(tutorialImage0, 0, 0, tutorialImage0.width, tutorialImage0.height, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200,function(){
+        var tutorialBtn0 = Button(tutorialImage0, 0, 0, tutorialImage0.width, tutorialImage0.height, (canvas.width / 2) - 150, (canvas.height / 2) -300, 300, 300,function(){
           Button.list = [];
           Background.list = [];
-          var tutorialBtn1 = Button(tutorialImage1, 0, 0, tutorialImage1.width, tutorialImage1.height, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 500, 500,function(){
+          var tutorialBtn1 = Button(tutorialImage1, 0, 0, tutorialImage1.width, tutorialImage1.height, (canvas.width / 2) - 250, (canvas.height / 2) - 300, 500, 500,function(){
             Button.list = [];
             Background.list = [];
-            var tutorialBtn2 = Button(tutorialImage2, 0, 0, tutorialImage2.width, tutorialImage2.height, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 500, 500,function(){
+            var tutorialBtn2 = Button(tutorialImage2, 0, 0, tutorialImage2.width, tutorialImage2.height, (canvas.width / 2) - 250, (canvas.height / 2) - 300, 500, 500,function(){
               Button.list = [];
               Background.list = [];
-              var tutorialBtn3 = Button(tutorialImage3, 0, 0, tutorialImage3.width, tutorialImage3.height, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 500, 500,function(){
+              var tutorialBtn3 = Button(tutorialImage3, 0, 0, tutorialImage3.width, tutorialImage3.height, (canvas.width / 2) - 250, (canvas.height / 2) - 300, 500, 500,function(){
                 Button.list = [];
                 Background.list = [];
                 start();
@@ -76,7 +76,7 @@ function init(){
       sounds[1].onOff = false;
     }, 4000);
   }
-  
+
   var background = Background(bgImg, canvas, start);
   var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
 
@@ -267,8 +267,7 @@ function mainLoop(){
 
   for(var i in Mob.list){
     var m=Mob.list[i];
-    var hitArea={x:m.x+m.width/2,y:m.y+m.height/2,width:m.width,height:m.height};
-    if(m.interaction&&user!=null&&hitTestBox(user,hitArea)){
+    if(displayedWindow(m)&&m.interaction&&user!=null&&hitTestBox(user,m)){
       user.speedX+=-Math.cos(Math.atan2(m.y-user.y,m.x-user.x));
       user.speedY+=-Math.sin(Math.atan2(m.y-user.y,m.x-user.x));
       m.speedX+=Math.cos(Math.atan2(m.y-user.y,m.x-user.x));
@@ -281,7 +280,7 @@ function mainLoop(){
     var m1=Mob.list[i];
 		for(var j in Mob.list){
 	    var m2=Mob.list[j];
-			if(m1!=m2&&hitTestBox(m1,m2)){
+			if(displayedWindow(m1)&&displayedWindow(m2)&&m1!=m2&&hitTestBox(m1,m2)){
 				m1.x+=Math.cos(Math.atan2(m2.y-m1.y,m2.x-m1.x))*0.5;
 	      m1.y+=Math.sin(Math.atan2(m2.y-m1.y,m2.x-m1.x))*0.5;
 	      m2.x+=Math.cos(Math.atan2(m2.y-m1.y,m2.x-m1.x))*0.5;
@@ -294,7 +293,7 @@ function mainLoop(){
 	if(user!=null){
 		for(var i in Tile.list){
 			var t=Tile.list[i];
-			if(hitTestBox(user,t)){
+			if(displayedWindow(t)&&hitTestBox(user,t)){
 				if(t.tileId==11){
 					if(timeCounter!=null){
 						clearInterval(timeCounter.loop);
@@ -324,7 +323,7 @@ function mainLoop(){
     var m=Mob.list[i];
 		for(var j in Tile.list){
 			var t=Tile.list[j];
-			if(hitTestBox(m,t)&&t.tileId!=0&&t.tileId!=11){
+			if(displayedWindow(m)&&displayedWindow(t)&&hitTestBox(m,t)&&t.tileId!=0&&t.tileId!=11){
 				m.speedX=-Math.cos(Math.atan2(t.y-m.y,t.x-m.x))*(m.accel+0.5);
 				m.speedY=-Math.sin(Math.atan2(t.y-m.y,t.x-m.x))*(m.accel+0.5);
 			}
@@ -335,7 +334,7 @@ function mainLoop(){
 	if(user!=null){
 		for(var i in Item.list){
 			var item=Item.list[i];
-			if(hitTestBox(user,item)){
+			if(displayedWindow(item)&&hitTestBox(user,item)){
 				item.get();
 			}
 		}

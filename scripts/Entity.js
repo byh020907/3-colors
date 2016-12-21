@@ -21,7 +21,7 @@ var Entity=function(img){
   };
 
   self.draw=function(context){
-    if(pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
+    if(displayedWindow(self)){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       context.drawImage(self.image,-self.width/2,-self.height/2,self.width,self.height);
@@ -52,7 +52,7 @@ var Player=function(img){
   var ani=new animation(self.image,self.width,self.height,4,4);
 
   self.draw=function(context){
-    if(pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
+    if(displayedWindow(self)){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       context.fillStyle="rgba(255,0,0,1)";
@@ -114,7 +114,7 @@ var Mob=function(img){
   var attackEnable=true;
   var ani=new animation(self.image,self.width,self.height,4,4);
   self.draw=function(context){
-    if(self.interaction&&pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
+    if(self.interaction&&displayedWindow(self)){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       ani.draw(context);
@@ -181,7 +181,7 @@ var Item=function(img,func){
   var self=Entity(img);
 
   self.draw=function(context){
-    if(pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
+    if(displayedWindow(self)){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       context.drawImage(self.image,-self.width/2,-self.height/2,self.width,self.height);
@@ -212,7 +212,7 @@ var Tile=function(img,id,x,y,size){
     self.color=self.tileId-1;
   }
   self.draw=function(context){
-    if((self.color==null||self.color==currentColor)&&self.tileId!=0&&self.tileId!=1&&pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea){
+    if((self.color==null||self.color==currentColor)&&self.tileId!=0&&self.tileId!=1&&displayedWindow(self)){
       context.save();
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       context.drawImage(self.image,-self.width/2,-self.height/2,self.width,self.height);
@@ -250,9 +250,10 @@ var FieldMap=function(id,map){
         m.x=x*self.tileSize+self.tileSize/2;
         m.y=y*self.tileSize+self.tileSize/2;
         if(m.color==0){
-          m.accel=0.4;
+          m.accel=0.3;
         }else{
           m.accel=1;
+          m.friction=0.9;
         }
         self.tiles[y][x]=Tile(window["obstacleImage"+0],0,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
       }else if(10<=num&&num<=11){

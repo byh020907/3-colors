@@ -1,4 +1,9 @@
 "use strict"
+
+
+function displayedWindow(self){
+  return pivot.x-canvas.width/2-drawArea<self.x&&self.x<pivot.x+canvas.width/2+drawArea&&pivot.y-canvas.height/2-drawArea<self.y&&self.y<pivot.y+canvas.height/2+drawArea;
+}
               //milisecond  //second
 function timer(interval,remainTime,func){
   var self={};
