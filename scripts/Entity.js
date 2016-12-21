@@ -105,6 +105,7 @@ var Mob=function(img){
   self.find=true;
 
   self.interaction=true;
+  self.stun=false;
 
   self.color=0;//Color.RED:1,Color.GREEN:2,Color.BLUE:3
 
@@ -118,6 +119,9 @@ var Mob=function(img){
       context.translate(self.x-pivot.x+canvas.width/2,self.y-pivot.y+canvas.height/2);
       ani.draw(context);
       ani.nextFrame(1000/30);
+      if(self.stun){
+        context.drawImage(stunEffectImage,-self.width/2+20,-self.height/1.5,35,50);
+      }
       context.restore();
     }
   }
@@ -133,7 +137,7 @@ var Mob=function(img){
   }
 
   self.move=function(map,x,y){
-    if(self.interaction){
+    if(self.interaction&&!self.stun){
       if(distance(self.x,self.y,x,y)<200){
         var angle=Math.atan2(y-self.y,x-self.x);
         self.speedX+=Math.cos(angle)*self.accel;
@@ -275,8 +279,14 @@ var FieldMap=function(id,map){
           var i=Item(window["itemImage"+(num-12)],function(){
             for(var i in Mob.list){
               var m=Mob.list[i];
-              m.interaction=false;
+              m.stun=true;
             }
+            setTimeout(function(){
+              for(var i in Mob.list){
+                var m=Mob.list[i];
+                m.stun=false;
+              }
+            },3000);
           });
         }
 

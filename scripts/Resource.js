@@ -82,6 +82,8 @@ itemImage1.src="images/시간증가아이템.png";
 var itemImage2=new Image();
 itemImage2.src="images/스턴아이템.png";
 
+var stunEffectImage=new Image();
+stunEffectImage.src="images/스턴이미지.png";
 
 
 var mapImage1=new Image();
