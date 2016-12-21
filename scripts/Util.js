@@ -1,15 +1,15 @@
 "use strict"
               //milisecond  //second
 function timer(interval,remainTime,func){
-  if(remainTime<=0){
-    currentRemainTime=remainTime;
-    func();
-    return;
-  }
-  setTimeout(function(){
+  var self={};
+  self.loop=setInterval(function(){
+    if(currentRemainTime<=0){
+      func();
+      clearInterval(loop);
+    }
     currentRemainTime-=interval/1000;
-    timer(interval,currentRemainTime,func);
   },interval);
+  return self;
 }
 
 function distance(x1,y1,x2,y2){
