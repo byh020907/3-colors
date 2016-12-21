@@ -40,20 +40,43 @@ function init(){
   sounds[1].onOff = false;
   sounds[2].onOff = false;
 	fadeIn();
-  var background = Background(bgImg, canvas, function() {
-      console.log("Background Clicked");
-			sounds[0].onOff = false;
-      sounds[1].onOff = true;
-      fadeOut();
-      setTimeout(function() {
-        fadeIn();
-        var b = Background(bgImgBW, canvas, function() {});
-        var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200,stageScreen);
-      }, 500);
-			setTimeout(function() {
-        sounds[1].onOff = false;
-      }, 4000);
-  });
+  function start() {
+    console.log("Background Clicked");
+  	sounds[0].onOff = false;
+    sounds[1].onOff = true;
+    fadeOut();
+    setTimeout(function() {
+      fadeIn();
+      var b = Background(bgImgBW, canvas, function() {});
+      var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200,stageScreen);
+      var tutorialBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 300, 200, 200,function(){
+        Button.list = [];
+        Background.list = [];
+        var tutorialBtn0 = Button(tutorialImage0, 0, 0, tutorialImage0.width, tutorialImage0.height, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200,function(){
+          Button.list = [];
+          Background.list = [];
+          var tutorialBtn1 = Button(tutorialImage1, 0, 0, tutorialImage1.width, tutorialImage1.height, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 500, 500,function(){
+            Button.list = [];
+            Background.list = [];
+            var tutorialBtn2 = Button(tutorialImage2, 0, 0, tutorialImage2.width, tutorialImage2.height, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 500, 500,function(){
+              Button.list = [];
+              Background.list = [];
+              var tutorialBtn3 = Button(tutorialImage3, 0, 0, tutorialImage3.width, tutorialImage3.height, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 500, 500,function(){
+                Button.list = [];
+                Background.list = [];
+                start();
+                var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
+              });
+            });
+          });
+        });
+      });
+    }, 500);
+  	setTimeout(function() {
+      sounds[1].onOff = false;
+    }, 4000);
+  }
+  var background = Background(bgImg, canvas, start);
   var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
 
   gameLoop();
@@ -79,7 +102,7 @@ function selectState(currentState){
 			miniMap=null;
 			Button.list = [];
 			Background.list = [];
-			TextField.list=[];
+			TextField.list = [];
 
 			Entity.list={};
 			user=null;
@@ -99,7 +122,7 @@ function selectState(currentState){
       break;
     }
     case State.STAGE1:{
-			currentRemainTime=30;
+			currentRemainTime=40;
 			miniMap=MiniMap(1600-150,0,150,150);
 			fadeIn();
       Button.list = [];

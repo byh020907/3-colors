@@ -86,11 +86,18 @@ var stunEffectImage=new Image();
 stunEffectImage.src="images/스턴이미지.png";
 
 
-var mapImage1=new Image();
-mapImage1.src="images/map7.jpg";
+//tutorialImage
+var tutorialImage0=new Image();
+tutorialImage0.src="images/방향키.jpg";
 
-var mapImage1_1=new Image();
-mapImage1_1.src="images/map7_1.png";
+var tutorialImage1=new Image();
+tutorialImage1.src="images/블록.jpg";
+
+var tutorialImage2=new Image();
+tutorialImage2.src="images/아이템.jpg";
+
+var tutorialImage3=new Image();
+tutorialImage3.src="images/미니맵.jpg";
 
 
 //재석이 이미지
