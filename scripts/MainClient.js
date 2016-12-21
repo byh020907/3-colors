@@ -129,7 +129,7 @@ function selectState(currentState){
       Button.list = [];
       Background.list = [];
 			timeTextField=TextField(currentRemainTime,"30px Verdana","rgba(255,255,255,1)",1475,200,100);
-			timeCounter=timer(10,currentRemainTime,function(){
+			timeCounter=timer(50,currentRemainTime,function(){
 				fadeColor="rgba(255,255,255,0)";
 				fadeIn();
 				currentState=State.LOBBY;
@@ -144,6 +144,24 @@ function selectState(currentState){
       break;
     }
     case State.STAGE2:{
+      currentRemainTime=40;
+			miniMap=MiniMap(1600-150,0,150,150);
+			fadeIn();
+      Button.list = [];
+      Background.list = [];
+			timeTextField=TextField(currentRemainTime,"30px Verdana","rgba(255,255,255,1)",1475,200,100);
+			timeCounter=timer(50,currentRemainTime,function(){
+				fadeColor="rgba(255,255,255,0)";
+				fadeIn();
+				currentState=State.LOBBY;
+				selectState(currentState);
+        Button.list = [];
+        Background.list = [];
+				fieldMap=null;
+        var gameOverBtn = Button(gameOverImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
+			});
+			hitMap=hitMapData2;
+      fieldMap=FieldMap(2,mapData2);
       break;
     }
     case State.STAGE3:{

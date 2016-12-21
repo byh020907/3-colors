@@ -254,6 +254,7 @@ var FieldMap=function(id,map){
         }else{
           m.accel=1;
           m.friction=0.9;
+          m.damage=10;
         }
         self.tiles[y][x]=Tile(window["obstacleImage"+0],0,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
       }else if(10<=num&&num<=11){
