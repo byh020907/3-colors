@@ -50,22 +50,21 @@ function init(){
       var b = Background(bgImgBW, canvas, function() {});
       var gameStartBtn = Button(gameStartImg, 0, 0, 200, 200, (canvas.width / 2) - 100, (canvas.height / 2) + 100, 200, 200,stageScreen);
       var tutorialBtn = Button(howtoImage, 0, 0, howtoImage.width, howtoImage.height, canvas.width - 200,0, 200, 200,function(){
-        Button.list = [];
         Background.list = [];
+        Button.list = [];
         var tutorialBtn0 = Button(tutorialImage0, 0, 0, tutorialImage0.width, tutorialImage0.height, (canvas.width / 2) - 150, (canvas.height / 2) -300, 300, 300,function(){
           Button.list = [];
-          Background.list = [];
           var tutorialBtn1 = Button(tutorialImage1, 0, 0, tutorialImage1.width, tutorialImage1.height, (canvas.width / 2) - 250, (canvas.height / 2) - 300, 500, 500,function(){
             Button.list = [];
-            Background.list = [];
             var tutorialBtn2 = Button(tutorialImage2, 0, 0, tutorialImage2.width, tutorialImage2.height, (canvas.width / 2) - 250, (canvas.height / 2) - 300, 500, 500,function(){
               Button.list = [];
-              Background.list = [];
               var tutorialBtn3 = Button(tutorialImage3, 0, 0, tutorialImage3.width, tutorialImage3.height, (canvas.width / 2) - 250, (canvas.height / 2) - 300, 500, 500,function(){
                 Button.list = [];
-                Background.list = [];
-                start();
-                var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
+                var tutorialBtn4 = Button(tutorialImage4, 0, 0, tutorialImage4.width, tutorialImage4.height, (canvas.width / 2) - 250, (canvas.height / 2) - 300, 500, 500,function(){
+                  Button.list = [];
+                  start();
+                  var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
+                });
               });
             });
           });
@@ -90,10 +89,6 @@ function init(){
   },2000);
 }
 
-function colorChange(color){
-	currentColor=color;
-}
-
 function selectState(currentState){
   switch (currentState) {
     case State.LOBBY:{
@@ -112,8 +107,8 @@ function selectState(currentState){
 			Item.list={};
 			FieldMap.list={};
 			var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
-			for (var i = 0; i < 3; i++) {
-				var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 400, 450, 200, 200, (function(a){
+			for (var i = 0; i <= 3; i++) {
+				var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 100, 450, 200, 200, (function(a){
 					return function(){
 						currentState=State["STAGE"+(1+a)];
 						selectState(currentState);
@@ -124,7 +119,7 @@ function selectState(currentState){
     }
     case State.STAGE1:{
 			currentRemainTime=40;
-			miniMap=MiniMap(1600-150,0,150,150);
+			miniMap=MiniMap(1600-160,10,150,150);
 			fadeIn();
       Button.list = [];
       Background.list = [];
@@ -145,7 +140,7 @@ function selectState(currentState){
     }
     case State.STAGE2:{
       currentRemainTime=40;
-			miniMap=MiniMap(1600-150,0,150,150);
+			miniMap=MiniMap(1600-160,10,150,150);
 			fadeIn();
       Button.list = [];
       Background.list = [];
@@ -165,6 +160,24 @@ function selectState(currentState){
       break;
     }
     case State.STAGE3:{
+      currentRemainTime=40;
+			miniMap=MiniMap(1600-160,10,150,150);
+			fadeIn();
+      Button.list = [];
+      Background.list = [];
+			timeTextField=TextField(currentRemainTime,"30px Verdana","rgba(255,255,255,1)",1475,200,100);
+			timeCounter=timer(50,currentRemainTime,function(){
+				fadeColor="rgba(255,255,255,0)";
+				fadeIn();
+				currentState=State.LOBBY;
+				selectState(currentState);
+        Button.list = [];
+        Background.list = [];
+				fieldMap=null;
+        var gameOverBtn = Button(gameOverImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
+			});
+			hitMap=hitMapData3;
+      fieldMap=FieldMap(3,mapData3);
       break;
     }
     case State.STAGE4:{
@@ -187,9 +200,18 @@ function gameLoop(){
         sounds[i].audio.pause();
     }
 	}
+
 	if(timeTextField!=null){
 		timeTextField.text=(currentRemainTime).toFixed(2);
 	}
+
+  for(var i in Tile.list){
+    var t=Tile.list[i];
+    if(displayedWindow(t)&&!(0<=t.tileId&&t.tileId<=4)){
+      t.miniMapEnable=true;
+    }
+  }
+
   if(gameLoopEnable){
     requestAnimationFrame(gameLoop);
   }
@@ -273,13 +295,13 @@ function mainLoop(){
 		fadeColor="rgba(255,255,255,0)";
 		fadeOut();
     setTimeout(function() {
-        fadeIn();
-				currentState=State.LOBBY;
-				selectState(currentState);
-        Button.list = [];
-        Background.list = [];
-				fieldMap=null;
-        var gameOverBtn = Button(gameOverImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
+      fadeIn();
+			currentState=State.LOBBY;
+			selectState(currentState);
+      Button.list = [];
+      Background.list = [];
+			fieldMap=null;
+      var gameOverBtn = Button(gameOverImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
     }, 500);
 	}
 
@@ -308,33 +330,32 @@ function mainLoop(){
   }
 
 	//유저 대 맵
-	if(user!=null){
-		for(var i in Tile.list){
-			var t=Tile.list[i];
-			if(displayedWindow(t)&&hitTestBox(user,t)){
-				if(t.tileId==11){
-					if(timeCounter!=null){
-						clearInterval(timeCounter.loop);
-					}
-					user=null;
-					fadeColor="rgba(255,255,255,0)";
-					fadeOut();
-			    setTimeout(function() {
-			        fadeIn();
-							currentState=State.LOBBY;
-							selectState(currentState);
-			        Button.list = [];
-			        Background.list = [];
-							fieldMap=null;
-			        var gameClearBtn = Button(gameClearImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
-			    }, 500);
-				}else if(t.tileId!=0){
-					user.speedX=-Math.cos(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);
-					user.speedY=-Math.sin(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);
+	for(var i in Tile.list){
+		var t=Tile.list[i];
+		if(user!=null&&displayedWindow(t)&&hitTestBox(user,t)){
+			if(t.tileId==11){
+				if(timeCounter!=null){
+					clearInterval(timeCounter.loop);
 				}
+				user=null;
+				fadeColor="rgba(255,255,255,0)";
+				fadeOut();
+		    setTimeout(function() {
+		        fadeIn();
+						currentState=State.LOBBY;
+						selectState(currentState);
+		        Button.list = [];
+		        Background.list = [];
+						fieldMap=null;
+		        var gameClearBtn = Button(gameClearImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
+		    }, 500);
+			}else if(t.tileId!=0){
+				user.speedX=-Math.cos(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);
+				user.speedY=-Math.sin(Math.atan2(t.y-user.y,t.x-user.x))*(user.accel+0.5);
 			}
 		}
 	}
+
 
 	//몹 대 맵
   for(var i in Mob.list){
@@ -349,12 +370,10 @@ function mainLoop(){
   }
 
 	//아이템 대 유저
-	if(user!=null){
-		for(var i in Item.list){
-			var item=Item.list[i];
-			if(displayedWindow(item)&&hitTestBox(user,item)){
-				item.get();
-			}
+	for(var i in Item.list){
+		var item=Item.list[i];
+		if(user!=null&&displayedWindow(item)&&hitTestBox(user,item)){
+			item.get();
 		}
 	}
 

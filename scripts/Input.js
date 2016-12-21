@@ -8,28 +8,53 @@ window.addEventListener("mousemove",mouseMove,false);
 var keyInput=[];
 
 var lastColor=Color.RED;
+var colorChangeTime=1000;
+var colorChangeEnable=true;
+
+function colorChange(color){
+  if(colorChangeEnable){
+    switch (color) {
+      case Color.RED:{
+        fadeIn("rgba(255,0,0,0.2)",1.5);
+        lastColor=Color.RED;
+      }break;
+
+      case Color.GREEN:{
+        fadeIn("rgba(0,255,0,0.2)",1.5);
+        lastColor=Color.GREEN;
+      }break;
+
+      case Color.BLUE:{
+        fadeIn("rgba(0,0,255,0.2)",1.5);
+        lastColor=Color.BLUE;
+      }break;
+      default:
+    }
+    currentColor=color;
+    colorChangeEnable=false;
+
+    setTimeout(function(){
+      colorChangeEnable=true;
+    },colorChangeTime);
+  }
+}
+
 function keyDown(e){
   keyInput[e.keyCode]=true;
 
   if(keyInput[49]){
     if(lastColor!=Color.RED){
       colorChange(Color.RED);
-      fadeIn("rgba(255,0,0,0.2)");
-      lastColor=Color.RED;
     }
   }
   if(keyInput[50]){
     if(lastColor!=Color.GREEN){
       colorChange(Color.GREEN);
-      fadeIn("rgba(0,255,0,0.2)");
-      lastColor=Color.GREEN;
     }
   }
   if(keyInput[51]){
     if(lastColor!=Color.BLUE){
       colorChange(Color.BLUE);
-      fadeIn("rgba(0,0,255,0.2)");
-      lastColor=Color.BLUE;
     }
   }
 }
