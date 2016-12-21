@@ -19,7 +19,7 @@ function Button(image, imgX, imgY, imgWidth, imgHeight, x, y, width, height, fun
     self.draw = function(context) {
         context.save();
         context.translate(self.x + self.width / 2, self.y + self.height / 2);
-        context.rotate(this.rotate * Math.PI / 180);
+        context.rotate(self.rotate * Math.PI / 180);
         context.drawImage(self.image, imgX, imgY, imgWidth, imgHeight, -self.width / 2, -self.height / 2, self.width, self.height);
         context.restore();
     }
@@ -47,7 +47,7 @@ function Background(image, canvas, func) {
     self.draw = function(context) {
         context.save();
         context.translate(canvas.width / 2, canvas.height / 2);
-        context.rotate(this.rotate * Math.PI / 180);
+        context.rotate(self.rotate * Math.PI / 180);
         context.drawImage(self.image, 0, 0, self.image.width, self.image.height, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
         context.restore();
     }
@@ -73,7 +73,7 @@ var TextField=function(text,font,color,x,y,width){
 
   self.draw = function(context) {
     context.save();
-    context.rotate(this.rotate * Math.PI / 180);
+    context.rotate(self.rotate * Math.PI / 180);
     context.font=self.font;
     context.fillStyle=self.color;
     context.fillText(self.text,self.x,self.y,self.width);
@@ -85,3 +85,37 @@ var TextField=function(text,font,color,x,y,width){
 }
 
 TextField.list=[];
+
+var MiniMap=function(x,y,width,height){
+  var self=UI(x,y,width,height);
+  self.rotate=0;
+
+  self.draw = function(context) {
+    context.save();
+    context.translate(self.x + self.width / 2, self.y + self.height / 2);
+    context.rotate(self.rotate * Math.PI / 180);
+    context.fillStyle="white";
+    context.fillRect(-self.width / 2, -self.height / 2, self.width, self.height);
+    self.setLocation(context);
+    context.restore();
+  }
+
+  self.setLocation=function(context){
+    context.save();
+    context.fillStyle="yellow";
+    //user
+    if(user!=null&&fieldMap!=null){
+      context.fillRect(self.x+self.width*(user.x)/fieldMap.width*fieldMap.tileSize,self.y+self.height*(user.y)/fieldMap.height*fieldMap.tileSize,5,5);
+    }
+
+    //finishpoint
+    context.fillStyle="green";
+    for(var i in Tile.list){
+      if(11==Tile.list[i].tileId&&fieldMap!=null){
+        context.fillRect(self.x+self.width*(user.x)/fieldMap.width*fieldMap.tileSize,self.y+self.height*(user.y)/fieldMap.height*fieldMap.tileSize,5,5);
+      }
+    }
+    context.restore();
+  }
+  return self;
+}

@@ -8,13 +8,11 @@ var canvasCtx;
 var canvasBuffer;
 var bufferCtx;
 
-var gameOver=false;
-var killText;
+var miniMap;
 
 var fieldMap;
 
 var timeTextField;
-
 var timeCounter;
 
 var hitMap;
@@ -78,6 +76,7 @@ function selectState(currentState){
 			if(timeCounter!=null){
 				clearInterval(timeCounter.loop);
 			}
+			miniMap=null;
 			Button.list = [];
 			Background.list = [];
 			TextField.list=[];
@@ -101,6 +100,7 @@ function selectState(currentState){
     }
     case State.STAGE1:{
 			currentRemainTime=20;
+			miniMap=MiniMap(550,550,100,100);
 			fadeIn();
       Button.list = [];
       Background.list = [];
@@ -148,6 +148,9 @@ function gameLoop(){
 	if(timeTextField!=null){
 		timeTextField.text=(currentRemainTime).toFixed(2);
 	}
+	if(miniMap!=null){
+		miniMap.draw(bufferCtx);
+	}
   if(gameLoopEnable){
     requestAnimationFrame(gameLoop);
   }
@@ -188,8 +191,9 @@ function drawLoop(){
       Button.list[i].draw(bufferCtx);
   }
 
-	if(timeTextField!=null){
-		timeTextField.draw(bufferCtx);
+	for(var i=0; i < TextField.list.length; i++){
+		TextField.list[i].draw(bufferCtx);
+		timeTextField.color="rgba("+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.random()+")";
 	}
 
 	bufferCtx.fillStyle=fadeColor;
