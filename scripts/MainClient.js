@@ -89,12 +89,12 @@ function selectState(currentState){
 			FieldMap.list={};
 			var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
 			for (var i = 0; i < 3; i++) {
-					var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 400, 450, 200, 200, (function(a){
-						return function(){
-							currentState=State["STAGE"+(1+a)];
-							selectState(currentState);
-						}
-					}(i)));
+				var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 400, 450, 200, 200, (function(a){
+					return function(){
+						currentState=State["STAGE"+(1+a)];
+						selectState(currentState);
+					}
+				}(i)));
 			}
       break;
     }
@@ -148,9 +148,6 @@ function gameLoop(){
 	if(timeTextField!=null){
 		timeTextField.text=(currentRemainTime).toFixed(2);
 	}
-	if(miniMap!=null){
-		miniMap.draw(bufferCtx);
-	}
   if(gameLoopEnable){
     requestAnimationFrame(gameLoop);
   }
@@ -194,6 +191,10 @@ function drawLoop(){
 	for(var i=0; i < TextField.list.length; i++){
 		TextField.list[i].draw(bufferCtx);
 		timeTextField.color="rgba("+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.random()+")";
+	}
+
+	if(miniMap!=null){
+		miniMap.draw(bufferCtx);
 	}
 
 	bufferCtx.fillStyle=fadeColor;
