@@ -208,6 +208,7 @@ var Tile=function(img,id,x,y,size){
   self.y=y;
   self.tileId=id;
   self.width=self.height=size;
+  self.miniMapEnable=false;
   if(2<=self.tileId&&self.tileId<=4){
     self.color=self.tileId-1;
   }
@@ -262,6 +263,8 @@ var FieldMap=function(id,map){
           user=Player(charImage0);
           user.x=x*self.tileSize+self.tileSize/2;
           user.y=y*self.tileSize+self.tileSize/2;
+          pivot.x=user.x;
+          pivot.y=user.y;
           user.accel=1;
           user.friction=0.8;
           self.tiles[y][x]=Tile(window["obstacleImage"+0],0,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);

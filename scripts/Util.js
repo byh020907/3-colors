@@ -242,18 +242,34 @@ var fadeOut = function() {
     );
 };
 
-var fadeIn = function(fadeColor) {
+var fadeIn = function() {
     console.log("페이드 인 시작");
     fadeCount++;
     fading = true;
 
     bgFadeAlpha = 0.001;
-    if(fadeColor!=null){
-      window.fadeColor=fadeColor;
+
+    var fadePercent=1.1;
+
+    var a=arguments;
+    switch (a.length) {
+      case 0:{
+        window.fadeColor="rgba(255,255,255,0)";
+      }break;
+      case 1:{
+        window.fadeColor=a[0];
+      }break;
+      case 2:{
+        window.fadeColor=a[0];
+        fadePercent=a[1];
+      }break;
+
+      default:break;
+
     }
     var fadeI = setInterval(
         function() {
-            bgFadeAlpha *= 1.1;
+            bgFadeAlpha *= fadePercent;
             if (bgFadeAlpha >= 1) {
                 clearInterval(fadeI);
                 console.log("페이드 인 끝");

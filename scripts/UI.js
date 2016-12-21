@@ -107,11 +107,19 @@ var MiniMap=function(x,y,width,height){
       context.fillRect(-self.width/2+self.width*(user.x)/(fieldMap.width*fieldMap.tileSize),-self.height/2+self.height*(user.y)/(fieldMap.height*fieldMap.tileSize),5,5);
     }
 
-    //finishpoint
-    context.fillStyle="green";
+    //Tile(grayBlock,finishpoint)
     for(var i in Tile.list){
-      if(11==Tile.list[i].tileId&&fieldMap!=null){
-        context.fillRect(-self.width/2+self.width*(Tile.list[i].x)/(fieldMap.width*fieldMap.tileSize),-self.height/2+self.height*(Tile.list[i].y)/(fieldMap.height*fieldMap.tileSize),5,5);
+      var t=Tile.list[i];
+      if(fieldMap!=null){
+        if(t.miniMapEnable){
+          context.fillStyle="gray";
+          var tileSizeX=self.width/fieldMap.width;
+          var tileSizeY=self.height/fieldMap.height;
+          context.fillRect(-self.width/2+self.width*(t.x)/(fieldMap.width*fieldMap.tileSize),-self.height/2+self.height*(t.y)/(fieldMap.height*fieldMap.tileSize),tileSizeX,tileSizeY);
+        }else if(t.tileId==11){
+          context.fillStyle="green";
+          context.fillRect(-self.width/2+self.width*(t.x)/(fieldMap.width*fieldMap.tileSize),-self.height/2+self.height*(t.y)/(fieldMap.height*fieldMap.tileSize),5,5);
+        }
       }
     }
   }

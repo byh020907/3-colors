@@ -98,10 +98,13 @@ var tutorialImage1=new Image();
 tutorialImage1.src="images/블록.jpg";
 
 var tutorialImage2=new Image();
-tutorialImage2.src="images/아이템.jpg";
+tutorialImage2.src="images/몹.jpg";
 
 var tutorialImage3=new Image();
-tutorialImage3.src="images/미니맵.jpg";
+tutorialImage3.src="images/아이템.jpg";
+
+var tutorialImage4=new Image();
+tutorialImage4.src="images/미니맵.jpg";
 
 
 //재석이 이미지
@@ -145,8 +148,8 @@ var stageScreen = function() {
     Button.list = [];
     Background.list = [];
     var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
-    for (var i = 0; i < 3; i++) {
-      var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 400, 450, 200, 200, (function(a){
+    for (var i = 0; i <= 3; i++) {
+      var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 100, 450, 200, 200, (function(a){
         return function(){
           currentState=State["STAGE"+(1+a)];
           selectState(currentState);
