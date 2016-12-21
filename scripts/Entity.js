@@ -262,7 +262,7 @@ var FieldMap=function(id,map){
         }else if(num==11){
           self.tiles[y][x]=Tile(finishImage,num,x*self.tileSize+self.tileSize/2,y*self.tileSize+self.tileSize/2,self.tileSize);
         }
-      }else if(12<=num&&num<=13){
+      }else if(12<=num&&num<=14){
         if(num==12){
           var i=Item(window["itemImage"+(num-12)],function(){
             user.currentHealth=user.maxHealth;
@@ -270,6 +270,13 @@ var FieldMap=function(id,map){
         }else if(num==13){
           var i=Item(window["itemImage"+(num-12)],function(){
             currentRemainTime+=20;
+          });
+        }else if(num==14){
+          var i=Item(window["itemImage"+(num-12)],function(){
+            for(var i in Mob.list){
+              var m=Mob.list[i];
+              m.interaction=false;
+            }
           });
         }
 

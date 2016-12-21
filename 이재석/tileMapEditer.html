@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>타일맵 생성기</title>
+  </head>
+  <style media="screen">
+    canvas{
+      border: 3px solid red;
+    }
+
+    #outputMapDataButton{
+      width:100px;
+      height:100px;
+      position: absolute;
+      top:10px;
+      left:2020px;
+    }
+    #outputHitMapDataButton{
+      width:100px;
+      height:100px;
+      position: absolute;
+      top:110px;
+      left:2020px;
+    }
+    #inputButton{
+      width:100px;
+      height:100px;
+      position: absolute;
+      top:210px;
+      left:2020px;
+    }
+    #outputMapData{
+      position: absolute;
+      top:10px;
+      left:2120px;
+    }
+  </style>
+  <body>
+    <script src="tileMapEditer_scripts/Resource.js"></script>
+    <script src="tileMapEditer_scripts/Main.js"></script>
+    <script src="tileMapEditer_scripts/Input.js"></script>
+
+    <canvas id="canvas" width="2000" height="2000"></canvas>
+    <button id="outputMapDataButton" type="button" name="button">맵데이터출력</button>
+    <button id="outputHitMapDataButton" type="button" name="button">hit맵데이터출력</button>
+    <button id="inputButton" type="button" name="button">입력</button>
+    <textarea id="outputMapData" name="outputMapData" rows="500" cols="500"></textarea>
+  </body>
+</html>

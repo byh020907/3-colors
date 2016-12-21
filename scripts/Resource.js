@@ -79,6 +79,9 @@ itemImage0.src="images/체력회복아이템.png";
 var itemImage1=new Image();
 itemImage1.src="images/시간증가아이템.png";
 
+var itemImage2=new Image();
+itemImage2.src="images/스턴아이템.png";
+
 
 
 var mapImage1=new Image();
