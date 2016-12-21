@@ -267,6 +267,9 @@ function mainLoop(){
 			var t=Tile.list[i];
 			if(hitTestBox(user,t)){
 				if(t.tileId==11){
+					if(timeCounter!=null){
+						clearInterval(timeCounter.loop);
+					}
 					user=null;
 					fadeColor="rgba(255,255,255,0)";
 					fadeOut();
