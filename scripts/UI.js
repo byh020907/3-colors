@@ -104,14 +104,14 @@ var MiniMap=function(x,y,width,height){
     context.fillStyle="yellow";
     //user
     if(user!=null&&fieldMap!=null){
-      context.fillRect(self.x-self.width/2+self.width*(user.x)/(fieldMap.width*fieldMap.tileSize),self.y-self.height/2+self.height*(user.y)/(fieldMap.height*fieldMap.tileSize),5,5);
+      context.fillRect(-self.width/2+self.width*(user.x)/(fieldMap.width*fieldMap.tileSize),-self.height/2+self.height*(user.y)/(fieldMap.height*fieldMap.tileSize),5,5);
     }
 
     //finishpoint
     context.fillStyle="green";
     for(var i in Tile.list){
       if(11==Tile.list[i].tileId&&fieldMap!=null){
-        context.fillRect(self.x-self.width/2+self.width*(Tile.list[i].x)/(fieldMap.width*fieldMap.tileSize),self.y-self.height/2+self.height*(Tile.list[i].y)/(fieldMap.height*fieldMap.tileSize),5,5);
+        context.fillRect(-self.width/2+self.width*(Tile.list[i].x)/(fieldMap.width*fieldMap.tileSize),-self.height/2+self.height*(Tile.list[i].y)/(fieldMap.height*fieldMap.tileSize),5,5);
       }
     }
   }
