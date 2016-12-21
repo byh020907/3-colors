@@ -1,4 +1,16 @@
 "use strict"
+              //milisecond  //second
+function timer(interval,remainTime){
+  if(remainTime<=0){
+    currentRemainTime=remainTime;
+    return;
+  }
+  setTimeout(function(){
+    currentRemainTime=remainTime;
+    timer(interval,remainTime-interval/1000);
+  },interval);
+}
+
 function distance(x1,y1,x2,y2){
   return Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
 }

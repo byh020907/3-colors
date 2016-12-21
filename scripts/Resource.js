@@ -1,5 +1,5 @@
 "use strict"
-
+//색
 var Color={
   RED:1,
   GREEN:2,
@@ -7,6 +7,10 @@ var Color={
 }
 var currentColor=Color.RED;
 
+//남은게임시간
+var currentRemainTime=10;
+
+//그리는 영역경계
 var drawArea=100;
 
 var gameLoopEnable=true;

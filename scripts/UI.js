@@ -63,3 +63,25 @@ function Background(image, canvas, func) {
 }
 
 Background.list = [];
+
+var TextField=function(text,font,color,x,y,width){
+  var self=UI(x, y, width,0);
+  self.rotate=0;
+  self.text=text;
+  self.font=font;
+  self.color=color;
+
+  self.draw = function(context) {
+    context.save();
+    context.rotate(this.rotate * Math.PI / 180);
+    context.font=self.font;
+    context.fillStyle=self.color;
+    context.fillText(self.text,self.x,self.y,self.width);
+    context.restore();
+  }
+
+  TextField.list.push(self);
+  return self;
+}
+
+TextField.list=[];
