@@ -267,7 +267,7 @@ var FieldMap=function(id,map){
           });
         }else if(num==13){
           var i=Item(window["itemImage"+(num-12)],function(){
-            console.log("ss");
+            currentRemainTime+=20;
           });
         }
 

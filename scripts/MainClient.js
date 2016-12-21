@@ -145,15 +145,24 @@ function selectState(currentState){
 						}
 					}(i)));
 			}
-			gameLoopEnable=false;
-			mainLoopEnable=false;
       break;
     }
     case State.STAGE1:{
+			currentRemainTime=10;
 			fadeIn();
       Button.list = [];
       Background.list = [];
-			timeTextField=TextField(currentRemainTime,"30px Verdana","rgba(255,255,255,1)",800,600,100);
+			timeTextField=TextField(currentRemainTime,"30px Verdana","rgba(255,255,255,1)",1500,100,100);
+			timer(10,currentRemainTime,function(){
+				fadeColor="rgba(255,255,255,0)";
+				fadeIn();
+				currentState=State.LOBBY;
+				selectState(currentState);
+        Button.list = [];
+        Background.list = [];
+				fieldMap=null;
+        var gameOverBtn = Button(gameOverImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
+			});
       fieldMap=FieldMap(1,[
 				[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]
 				,[5,0,2,2,2,0,0,0,0,2,2,2,0,0,0,2,2,2,0,4,0,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,5]
@@ -206,8 +215,6 @@ function selectState(currentState){
 				,[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,4,0,0,0,0,0,3,3,3,0,0,0,2,2,2,2,0,0,0,5]
 				,[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]
 			]);
-			gameLoopEnable=true;
-			mainLoopEnable=true;
       break;
     }
     case State.STAGE2:{
@@ -237,7 +244,7 @@ function gameLoop(){
     }
 	}
 	if(timeTextField!=null){
-		timeTextField.text=currentRemainTime;
+		timeTextField.text=(currentRemainTime).toFixed(2);
 	}
   if(gameLoopEnable){
     requestAnimationFrame(gameLoop);

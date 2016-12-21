@@ -1,13 +1,14 @@
 "use strict"
               //milisecond  //second
-function timer(interval,remainTime){
+function timer(interval,remainTime,func){
   if(remainTime<=0){
     currentRemainTime=remainTime;
+    func();
     return;
   }
   setTimeout(function(){
-    currentRemainTime=remainTime;
-    timer(interval,remainTime-interval/1000);
+    currentRemainTime-=interval/1000;
+    timer(interval,currentRemainTime,func);
   },interval);
 }
 
