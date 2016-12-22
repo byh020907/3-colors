@@ -302,7 +302,7 @@ var FieldMap = function(id, map) {
                                 var m = Mob.list[i];
                                 m.stun = false;
                             }
-                        }, 3000);
+                        }, 5000);
                     });
                 }
 
