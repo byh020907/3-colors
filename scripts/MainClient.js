@@ -205,7 +205,7 @@ function selectState(currentState) {
                 soundsClear();
                 sounds[10].onOff = true;
 
-                currentRemainTime = 200;
+                currentRemainTime = 160;
                 miniMap = MiniMap(1600 - 160, 10, 150, 150);
                 fadeIn();
                 Button.list = [];
@@ -396,17 +396,17 @@ function mainLoop() {
 
                 fadeOut();
                 setTimeout(function() {
-                    fadeIn();
-                    currentState = State.LOBBY;
-                    selectState(currentState);
-                    Button.list = [];
-                    Background.list = [];
-                    fieldMap = null;
-                    var gameClearBtn = Button(gameClearImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
+                  fadeIn();
+                  currentState = State.LOBBY;
+                  selectState(currentState);
+                  Button.list = [];
+                  Background.list = [];
+                  fieldMap = null;
+                  var gameClearBtn = Button(gameClearImg, 0, 0, 800, 600, 400, 150, 800, 600, stageScreen);
                 }, 500);
             } else if (t.tileId != 0) {
-                user.speedX = -Math.cos(Math.atan2(t.y - user.y, t.x - user.x)) * (user.accel + 0.5);
-                user.speedY = -Math.sin(Math.atan2(t.y - user.y, t.x - user.x)) * (user.accel + 0.5);
+                user.speedX = -Math.cos(Math.atan2(t.y - user.y, t.x - user.x)) * (user.accel + 1.5);
+                user.speedY = -Math.sin(Math.atan2(t.y - user.y, t.x - user.x)) * (user.accel + 1.5);
             }
         }
     }
