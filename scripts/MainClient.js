@@ -105,7 +105,7 @@ function selectState(currentState){
 			FieldMap.list={};
 			var logo = Button(logoImg, 0, 0, 800, 600, 400, 0, 800, 600, function() {});
 			for (var i = 0; i <= 3; i++) {
-				var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 100, 450, 200, 200, (function(a){
+				var b = Button(stagesImg, (i % 2) * 200, Math.floor(i / 2) * 200, 200, 200, (i * 300) + 250, 450, 200, 200, (function(a){
 					return function(){
 						currentState=State["STAGE"+(1+a)];
 						selectState(currentState);
