@@ -123,11 +123,12 @@ gameOverImg.src = "images/gameOver.png";
 var gameClearImg = new Image();
 gameClearImg.src = "images/gameClear.png";
 
-var audio = function(src, startTime, endTime) {
+var audio = function(src, startTime, endTime, volume) {
     var a = new Audio();
     a.src = src;
     a.currentTime = startTime;
     a.autoplay = false;
+    a.volume = volume;
 
     var self = {
         audio: a,
@@ -146,12 +147,13 @@ var audio = function(src, startTime, endTime) {
                 if (self.audio.currentTime >= self.endTime) {
                     if (self.loop) {
                         self.audio.currentTime = 0;
-                        //console.log("Audio Restarted");
+                        console.log("Audio Restarted");
                     } else {
                         self.onOff = false;
                         self.isPlaying = false;
                         clearInterval(playAudio);
-                        //console.log("Audio Stopped");
+                        console.log("Audio Stopped");
+                        self.audio.currentTime = 0;
                     }
                 }
             }, 100);
@@ -165,26 +167,29 @@ var audio = function(src, startTime, endTime) {
 var sounds = [];
 
 // Audios
-audio("audio/coinGetAudio.wav", 0, 0.3); //0
-audio("audio/crashAudio.mp3", 1, 5.5); //1
-audio("audio/dumAudio.wav", 0, 2); //2
-audio("audio/endingAudio.wav", 0, 45); //3
+audio("audio/coinGetAudio.wav", 0, 0.3, 1); //0
+audio("audio/crashAudio.mp3", 1, 5, 1); //1
+audio("audio/hitAudio1.mp3", 0, 0.5, 1); //2
+audio("audio/endingAudio.wav", 0, 45, 1); //3
 sounds[3].loop = true;
-audio("audio/gameOverAudio.mp3", 0, 270); //4
+audio("audio/gameOverAudio.mp3", 0, 270, 0.5); //4
 sounds[4].loop = true;
-audio("audio/gameStartAudio.mp3", 0, 5); //5
-audio("audio/gameWinAudio.mp3", 0, 3.8); //6
-audio("audio/healAudio.wav", 0, 0.2); //7
-audio("audio/inGameAudio1.mp3", 0, 134); //8
+audio("audio/gameStartAudio.mp3", 0, 5, 1); //5
+audio("audio/gameWinAudio.mp3", 0, 3.6, 1); //6
+sounds[6].loop = true;
+audio("audio/healAudio.wav", 0, 0.1, 1); //7
+audio("audio/inGameAudio1.mp3", 0, 134, 0.5); //8
 sounds[8].loop = true;
-audio("audio/inGameAudio2.mp3", 0, 70); //9
+audio("audio/inGameAudio2.mp3", 0, 69, 0.5); //9
 sounds[9].loop = true;
-audio("audio/inGameAudio3.mp3", 0, 180); //10
+audio("audio/inGameAudio3.mp3", 0, 180, 0.5); //10
 sounds[10].loop = true;
-audio("audio/startAudio.mp3", 0, 180); //11
+audio("audio/startAudio.mp3", 0, 180, 0.8); //11
 sounds[11].loop = true;
-audio("audio/timeUpAudio.wav", 0, 0.7); //12
-audio("audio/dieAudio.mp3", 0, 7); //13
+audio("audio/timeUpAudio.wav", 0, 0.6, 1); //12
+audio("audio/dieAudio.mp3", 0, 7, 1); //13
+audio("audio/hitAudio2.wav", 0, 0.1, 1); //14
+audio("audio/colorChangeAudio.mp3", 0, 0.1, 1); //15
 
 
 var stageScreen = function() {

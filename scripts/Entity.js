@@ -77,8 +77,13 @@ var Player = function(img) {
 
     self.attacked = function(damage) {
         if (self.currentHealth - damage > 0) {
-            sounds[2].audio.currentTime = 0;
-            sounds[2].onOff = true;
+            if (Math.floor(Math.random() * 3) < 2) {
+                sounds[14].audio.currentTime = 0;
+                sounds[14].onOff = true;
+            } else {
+                sounds[2].audio.currentTime = 0;
+                sounds[2].onOff = true;
+            }
             self.currentHealth -= damage;
         } else {
             self.toRemove = true;

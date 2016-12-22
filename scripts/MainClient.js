@@ -34,6 +34,7 @@ function init() {
     bufferCtx = canvasBuffer.getContext("2d");
 
     sounds[11].onOff = true;
+    sounds[11].audio.currentTime = 28;
     fadeIn();
 
     function start() {
@@ -47,6 +48,8 @@ function init() {
             var tutorialBtn = Button(howtoImage, 0, 0, howtoImage.width, howtoImage.height, canvas.width - 200, 0, 200, 200, function() {
                 Background.list = [];
                 Button.list = [];
+                soundsClear();
+                sounds[11].onOff = true;
                 var tutorialBtn0 = Button(tutorialImage0, 0, 0, tutorialImage0.width, tutorialImage0.height, (canvas.width / 2) - 150, (canvas.height / 2) - 300, 300, 300, function() {
                     Button.list = [];
                     var tutorialBtn1 = Button(tutorialImage1, 0, 0, tutorialImage1.width, tutorialImage1.height, (canvas.width / 2) - 250, (canvas.height / 2) - 300, 500, 500, function() {
@@ -125,6 +128,9 @@ function selectState(currentState) {
                 Background.list = [];
                 timeTextField = TextField(currentRemainTime, "30px Verdana", "rgba(255,255,255,1)", 1475, 200, 100);
                 timeCounter = timer(50, currentRemainTime, function() {
+                    soundsClear();
+                    sounds[4].onOff = true;
+                    sounds[13].onOff = true;
                     fadeColor = "rgba(255,255,255,0)";
                     fadeIn();
                     currentState = State.LOBBY;
@@ -144,12 +150,15 @@ function selectState(currentState) {
                 sounds[9].onOff = true;
 
                 currentRemainTime = 40;
-                miniMap = MiniMap(1600 - 160, 10, 150, 150);
+                miniMap = MiniMap(1600 - 160, 10, 150, 150)
                 fadeIn();
                 Button.list = [];
                 Background.list = [];
                 timeTextField = TextField(currentRemainTime, "30px Verdana", "rgba(255,255,255,1)", 1475, 200, 100);
                 timeCounter = timer(50, currentRemainTime, function() {
+                    soundsClear();
+                    sounds[4].onOff = true;
+                    sounds[13].onOff = true;
                     fadeColor = "rgba(255,255,255,0)";
                     fadeIn();
                     currentState = State.LOBBY;
@@ -175,6 +184,9 @@ function selectState(currentState) {
                 Background.list = [];
                 timeTextField = TextField(currentRemainTime, "30px Verdana", "rgba(255,255,255,1)", 1475, 200, 100);
                 timeCounter = timer(50, currentRemainTime, function() {
+                    soundsClear();
+                    sounds[4].onOff = true;
+                    sounds[13].onOff = true;
                     fadeColor = "rgba(255,255,255,0)";
                     fadeIn();
                     currentState = State.LOBBY;
@@ -200,6 +212,9 @@ function selectState(currentState) {
                 Background.list = [];
                 timeTextField = TextField(currentRemainTime, "30px Verdana", "rgba(255,255,255,1)", 1475, 200, 100);
                 timeCounter = timer(50, currentRemainTime, function() {
+                    soundsClear();
+                    sounds[4].onOff = true;
+                    sounds[13].onOff = true;
                     fadeColor = "rgba(255,255,255,0)";
                     fadeIn();
                     currentState = State.LOBBY;
@@ -327,7 +342,7 @@ function mainLoop() {
         user = null;
         fadeColor = "rgba(255,255,255,0)";
         soundsClear();
-        //sounds[4].onOff = true;
+        sounds[4].onOff = true;
         sounds[13].onOff = true;
 
         fadeOut();

@@ -10,7 +10,7 @@ function timer(interval, remainTime, func) {
     self.loop = setInterval(function() {
         if (currentRemainTime <= 0) {
             func();
-            clearInterval(loop);
+            clearInterval(self.loop);
         }
         currentRemainTime -= interval / 1000;
     }, interval);
