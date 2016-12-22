@@ -166,7 +166,7 @@ var sounds = [];
 
 // Audios
 audio("audio/coinGetAudio.wav", 0, 0.3); //0
-audio("audio/crashAudio.mp3", 0, 5.5); //1
+audio("audio/crashAudio.mp3", 1, 5.5); //1
 audio("audio/dumAudio.wav", 0, 2); //2
 audio("audio/endingAudio.wav", 0, 45); //3
 sounds[3].loop = true;
