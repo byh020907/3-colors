@@ -1,4 +1,5 @@
 "use strict"
+
 function UI(x, y, width, height) {
     var self = {};
     self.x = x;
@@ -64,65 +65,65 @@ function Background(image, canvas, func) {
 
 Background.list = [];
 
-var TextField=function(text,font,color,x,y,width){
-  var self=UI(x, y, width,0);
-  self.rotate=0;
-  self.text=text;
-  self.font=font;
-  self.color=color;
+var TextField = function(text, font, color, x, y, width) {
+    var self = UI(x, y, width, 0);
+    self.rotate = 0;
+    self.text = text;
+    self.font = font;
+    self.color = color;
 
-  self.draw = function(context) {
-    context.save();
-    context.rotate(self.rotate * Math.PI / 180);
-    context.font=self.font;
-    context.fillStyle=self.color;
-    context.fillText(self.text,self.x,self.y,self.width);
-    context.restore();
-  }
+    self.draw = function(context) {
+        context.save();
+        context.rotate(self.rotate * Math.PI / 180);
+        context.font = self.font;
+        context.fillStyle = self.color;
+        context.fillText(self.text, self.x, self.y, self.width);
+        context.restore();
+    }
 
-  TextField.list.push(self);
-  return self;
+    TextField.list.push(self);
+    return self;
 }
 
-TextField.list=[];
+TextField.list = [];
 
-var MiniMap=function(x,y,width,height){
-  var self=UI(x,y,width,height);
-  self.rotate=0;
+var MiniMap = function(x, y, width, height) {
+    var self = UI(x, y, width, height);
+    self.rotate = 0;
 
-  self.draw = function(context) {
-    context.save();
-    context.translate(self.x + self.width / 2, self.y + self.height / 2);
-    context.rotate(self.rotate * Math.PI / 180);
-    context.fillStyle="rgba(20,20,20,1)";
-    context.fillRect(-self.width / 2, -self.height / 2, self.width, self.height);
-    self.setLocation(context);
-    context.restore();
-  }
-
-  self.setLocation=function(context){
-    context.fillStyle="yellow";
-    //user
-    if(user!=null&&fieldMap!=null){
-      context.fillRect(-self.width/2+self.width*(user.x)/(fieldMap.width*fieldMap.tileSize),-self.height/2+self.height*(user.y)/(fieldMap.height*fieldMap.tileSize),5,5);
+    self.draw = function(context) {
+        context.save();
+        context.translate(self.x + self.width / 2, self.y + self.height / 2);
+        context.rotate(self.rotate * Math.PI / 180);
+        context.fillStyle = "rgba(20,20,20,1)";
+        context.fillRect(-self.width / 2, -self.height / 2, self.width, self.height);
+        self.setLocation(context);
+        context.restore();
     }
 
-    //Tile(grayBlock,finishpoint)
-    for(var i in Tile.list){
-      var t=Tile.list[i];
-      if(fieldMap!=null){
-        if(t.miniMapEnable){
-          context.fillStyle="gray";
-          var tileSizeX=self.width/fieldMap.width;
-          var tileSizeY=self.height/fieldMap.height;
-          context.fillRect(-self.width/2+self.width*(t.x)/(fieldMap.width*fieldMap.tileSize),-self.height/2+self.height*(t.y)/(fieldMap.height*fieldMap.tileSize),tileSizeX,tileSizeY);
-        }else if(t.tileId==11){
-          context.fillStyle="green";
-          context.fillRect(-self.width/2+self.width*(t.x)/(fieldMap.width*fieldMap.tileSize),-self.height/2+self.height*(t.y)/(fieldMap.height*fieldMap.tileSize),5,5);
+    self.setLocation = function(context) {
+        context.fillStyle = "yellow";
+        //user
+        if (user != null && fieldMap != null) {
+            context.fillRect(-self.width / 2 + self.width * (user.x) / (fieldMap.width * fieldMap.tileSize), -self.height / 2 + self.height * (user.y) / (fieldMap.height * fieldMap.tileSize), 5, 5);
         }
-      }
-    }
-  }
 
-  return self;
+        //Tile(grayBlock,finishpoint)
+        for (var i in Tile.list) {
+            var t = Tile.list[i];
+            if (fieldMap != null) {
+                if (t.miniMapEnable) {
+                    context.fillStyle = "gray";
+                    var tileSizeX = self.width / fieldMap.width;
+                    var tileSizeY = self.height / fieldMap.height;
+                    context.fillRect(-self.width / 2 + self.width * (t.x) / (fieldMap.width * fieldMap.tileSize), -self.height / 2 + self.height * (t.y) / (fieldMap.height * fieldMap.tileSize), tileSizeX, tileSizeY);
+                } else if (t.tileId == 11) {
+                    context.fillStyle = "green";
+                    context.fillRect(-self.width / 2 + self.width * (t.x) / (fieldMap.width * fieldMap.tileSize), -self.height / 2 + self.height * (t.y) / (fieldMap.height * fieldMap.tileSize), 5, 5);
+                }
+            }
+        }
+    }
+
+    return self;
 }
