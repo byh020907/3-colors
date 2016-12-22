@@ -8,7 +8,7 @@ window.addEventListener("mousemove",mouseMove,false);
 var keyInput=[];
 
 var lastColor=Color.RED;
-var colorChangeTime=1000;
+var colorChangeTime=1500;
 var colorChangeEnable=true;
 
 function colorChange(color){

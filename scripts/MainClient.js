@@ -33,11 +33,11 @@ function init(){
   canvasBuffer.height=canvas.height;
   bufferCtx=canvasBuffer.getContext("2d");
 
-  sounds[9].onOff = true;
+  // sounds[9].onOff = true;
 	fadeIn();
   function start() {
     console.log("Background Clicked");
-    soundsClear();
+    // soundsClear();
     fadeOut();
     setTimeout(function() {
       fadeIn();
@@ -66,7 +66,7 @@ function init(){
       });
     }, 500);
   	setTimeout(function() {
-      sounds[1].onOff = false;
+      // sounds[1].onOff = false;
     }, 4000);
   }
 
@@ -86,8 +86,8 @@ function init(){
 function selectState(currentState){
   switch (currentState) {
     case State.LOBBY:{
-      soundsClear();
-      sounds[8].onOff = true;
+      // soundsClear();
+      // sounds[8].onOff = true;
 
 			if(timeCounter!=null){
 				clearInterval(timeCounter.loop);
@@ -115,8 +115,8 @@ function selectState(currentState){
       break;
     }
     case State.STAGE1:{
-      soundsClear();
-      sounds[7].onOff = true;
+      // soundsClear();
+      // sounds[7].onOff = true;
 
 			currentRemainTime=40;
 			miniMap=MiniMap(1600-160,10,150,150);
@@ -139,8 +139,8 @@ function selectState(currentState){
       break;
     }
     case State.STAGE2:{
-      soundsClear();
-      sounds[8].onOff = true;
+      // soundsClear();
+      // sounds[8].onOff = true;
 
       currentRemainTime=40;
 			miniMap=MiniMap(1600-160,10,150,150);
@@ -163,8 +163,8 @@ function selectState(currentState){
       break;
     }
     case State.STAGE3:{
-      soundsClear();
-      sounds[7].onOff = true;
+      // soundsClear();
+      // sounds[7].onOff = true;
 
       currentRemainTime=40;
 			miniMap=MiniMap(1600-160,10,150,150);
@@ -217,13 +217,13 @@ function selectState(currentState){
 
 function gameLoop(){
 
-  for (var i = 0; i < sounds.length; i++) {
-      if (sounds[i].onOff) {
-          sounds[i].timePlay();
-      } else {
-          sounds[i].audio.pause();
-      }
-  }
+  // for (var i = 0; i < sounds.length; i++) {
+  //     if (sounds[i].onOff) {
+  //         sounds[i].timePlay();
+  //     } else {
+  //         sounds[i].audio.pause();
+  //     }
+  // }
 
 	if(timeTextField!=null){
 		timeTextField.text=(currentRemainTime).toFixed(2);
